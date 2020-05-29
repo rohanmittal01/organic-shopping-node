@@ -24,23 +24,23 @@ export class ErrorInterceptor implements HttpInterceptor {
             return throwError(applicationError);
           }
           const serverError = error.error;
-          let modalstateError = '';
-          if (serverError.errors && typeof serverError.error === 'object') {
+          let modalStateErrors = '';
+          if (serverError.errors && typeof serverError.errors === 'object') {
             for (const key in serverError.errors) {
               if (serverError.errors[key]) {
-                modalstateError += serverError.errors[key] + '\n';
+                modalStateErrors += serverError.errors[key] + '\n';
               }
             }
           }
-          return throwError(modalstateError || serverError || 'server error');
+          return throwError(modalStateErrors || serverError || 'Server Error');
         }
       })
     );
   }
 }
 
-export const ErrorInterceptorProvidor = {
+export const ErrorInterceptorProvider = {
   provide: HTTP_INTERCEPTORS,
   useClass: ErrorInterceptor,
-  multi: true,
+  multi: true
 };
