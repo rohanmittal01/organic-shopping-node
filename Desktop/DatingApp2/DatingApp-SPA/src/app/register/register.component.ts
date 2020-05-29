@@ -15,7 +15,7 @@ export class RegisterComponent implements OnInit {
   constructor(private authService: AuthService, private alertify: AlertifyService) { }
 
   ngOnInit() {
- 
+
   }
 
   register(){
@@ -30,6 +30,6 @@ export class RegisterComponent implements OnInit {
 
   cancel(){
     this.cancelRegister.emit(false);
-    ("cancelled");
+    // tslint:disable-next-line: no-unused-expression
   }
 }
