@@ -1,15 +1,36 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { ProductService } from '../_services/product.service';
 
 @Component({
-  selector: 'app-products',
+  selector: 'products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
 
-  constructor() { }
+  productListCollection: any[];
+  subscribe1: Subscription;
+  category: string;
+  filteredProducts: any = [];
+  cart: any;
+  cartSubscription: Subscription;
+
+  constructor(private productService: ProductService) {
+    this.getProducts();
+   }
 
   ngOnInit(): void {
   }
+
+  getProducts(){
+    console.log('prod');
+    this.productService.getAll().subscribe(data => {
+      this.filteredProducts = data;
+      
+    });
+  }
+  
+
 
 }
