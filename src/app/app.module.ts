@@ -21,6 +21,8 @@ import { NoopAnimationPlayer } from '@angular/animations';
 import { ProductFilterComponent } from './products/product-filter/product-filter.component';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { ProductService } from './_services/product.service';
+import { AuthGuardService } from './_services/auth-guard.service';
+import { RegisterComponent } from './register/register.component';
 
 
 @NgModule({
@@ -37,7 +39,8 @@ import { ProductService } from './_services/product.service';
     AdminOrdersComponent,
     LoginComponent,
     ProductFilterComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -47,19 +50,20 @@ import { ProductService } from './_services/product.service';
     BrowserAnimationsModule,
     HttpClientModule,
     RouterModule.forRoot([
-      {path: '', component: ProductsComponent},
-      {path: 'products', component: ProductsComponent},
-      {path: 'shopping-cart', component: ShoppingCartComponent},
+      {path: '', component: ProductsComponent, canActivate: [AuthGuardService]},
+      {path: 'products', component: ProductsComponent, canActivate: [AuthGuardService]},
+      {path: 'shopping-cart', component: ShoppingCartComponent, canActivate: [AuthGuardService]},
       {path: 'login', component: LoginComponent},
+      {path: 'register', component: RegisterComponent},
 
-      {path: 'check-out', component: CheckOutComponent},
-      {path: 'order-success/:id', component: OrderSuccessComponent},
-      {path: 'my/orders', component: MyOrdersComponent},
+      {path: 'check-out', component: CheckOutComponent, canActivate: [AuthGuardService]},
+      {path: 'order-success/:id', component: OrderSuccessComponent, canActivate: [AuthGuardService]},
+      {path: 'my/orders', component: MyOrdersComponent, canActivate: [AuthGuardService]},
 
     //  {path: 'admin/products/new', component: ProductFormComponent},
     //   {path: 'admin/products/:id', component: ProductFormComponet},
-      {path: 'admin/products', component: AdminProductsComponent},
-      {path: 'admin/orders', component: AdminOrdersComponent}
+      {path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuardService]},
+      {path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuardService]}
     ])
   ],
   providers: [

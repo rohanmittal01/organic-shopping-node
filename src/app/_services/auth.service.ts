@@ -17,16 +17,17 @@ export class AuthService {
   constructor(private http: HttpClient, private route: Router, private alertify: AlertifyService) { }
 
   login(model: any) {
-    return this.http.post(this.baseUrl + 'login', model).pipe(
-      map((response: any) => {
-        const user = response;
-        // console.log(user);
-        if (user) {
-          localStorage.setItem('token', user.token);
-          this.route.navigate(['/']);
-        }
-      })
-    );
+    return this.http.post(this.baseUrl + 'login', model)
+    // .pipe(
+    //   map((response: any) => {
+    //     const user = response;
+    //     // console.log(user);
+    //     if (user) {
+    //       localStorage.setItem('token', user.token);
+    //       this.route.navigate(['/']);
+    //     }
+    //   })
+    // );
   }
 
   loggedIn(){

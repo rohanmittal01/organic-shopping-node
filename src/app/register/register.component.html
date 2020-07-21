@@ -1,0 +1,18 @@
+<div class="container vertically-center">
+
+    <form #loginForm="ngForm" class="form-signin text-center" (submit)="register()">
+      <img class="mb-4" src="https://static.wixstatic.com/media/af5cd9_cc10e405f5a74b5e874ee7245593fc65~mv2.png/v1/fill/w_392,h_292,al_c,lg_1,q_85/af5cd9_cc10e405f5a74b5e874ee7245593fc65~mv2.webp" alt="" height="72">
+      <h1 class="h3 mb-3 font-weight-normal">Register</h1>
+      <label for="inputName" class="sr-only">Name</label>
+      <input #Name ngModel type="text" name="name" id="inputName" [(ngModel)]="model.name" class="form-control" placeholder="Full Name" required>
+      <label for="inputEmail" class="sr-only">Email address</label>
+      <input #Email ngModel type="email" name="email" id="inputEmail" [(ngModel)]="model.email" class="form-control" placeholder="Email address" [pattern]="emailPattern" required>
+      <label for="inputPassword" class="sr-only">Password</label>
+      <input #Password ngModel type="password" name="password" id="inputPassword" [(ngModel)]="model.password" class="form-control" placeholder="Password" required>
+      <button [disabled]="!loginForm.valid" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+  
+    </form>
+    <div class="form-signin" style="text-align: right">
+      <button type="button" class="btn" style="color: green;" routerLink="/login">Already Registered?</button>
+    </div>
+  </div>
