@@ -3,8 +3,16 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
+import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatFormFieldModule} from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -54,6 +62,15 @@ import { ProductFormComponent } from './product-form/product-form.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    MatTableModule,
+    MatIconModule,
+    MatSortModule,
+    MatPaginatorModule,
+    BrowserAnimationsModule,
+    NoopAnimationsModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatInputModule,
     RouterModule.forRoot([
       {path: '', component: ProductsComponent, canActivate: [AuthGuardService]},
       {path: 'products', component: ProductsComponent, canActivate: [AuthGuardService]},
