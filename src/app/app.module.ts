@@ -23,6 +23,9 @@ import { ProductCardComponent } from './product-card/product-card.component';
 import { ProductService } from './_services/product.service';
 import { AuthGuardService } from './_services/auth-guard.service';
 import { RegisterComponent } from './register/register.component';
+import { AuthService } from './_services/auth.service';
+import { AlertifyService } from './_services/alertify.service';
+import { LoggedinGuardService } from './_services/loggedin-guard.service';
 
 
 @NgModule({
@@ -67,6 +70,11 @@ import { RegisterComponent } from './register/register.component';
     ])
   ],
   providers: [
+    ProductService,
+    AuthService,
+    AlertifyService,
+    AuthGuardService,
+    LoggedinGuardService,
     ProductService
   ],
   bootstrap: [AppComponent]

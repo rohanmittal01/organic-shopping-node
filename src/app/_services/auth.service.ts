@@ -13,11 +13,11 @@ export class AuthService {
   baseUrl = "http://localhost:3000/users/"
   jwtHelper = new JwtHelperService();
   decodedToken: any;
-
+  // logged = false;
   constructor(private http: HttpClient, private route: Router, private alertify: AlertifyService) { }
 
   login(model: any) {
-    return this.http.post(this.baseUrl + 'login', model)
+    return this.http.post(this.baseUrl + 'login', model);
     // .pipe(
     //   map((response: any) => {
     //     const user = response;
@@ -41,7 +41,11 @@ export class AuthService {
       localStorage.removeItem('token');
       console.log('logged out!');
       this.alertify.warning('Logged Out!');
+      window.location.reload();
       this.route.navigate(['/login']);
+
+      // this.logged = false
+
     }
   }
   register(model: any){

@@ -1,4 +1,4 @@
-<div *ngIf="product.title" class="card">
+  <div *ngIf="product.title" class="card">
     <img class="card-img-top" [src]="product.imageUrl" *ngIf="product.imageUrl" alt="{{product.title}}" />
     <div class="card-body">
       <h5 class="card-title">{{ product.title }}</h5>
@@ -6,16 +6,16 @@
     </div>
 
     <div *ngIf="showActions" class="card-footer">
-        <button class="btn btn-secondary btn-block">Add to Cart</button>
+        <button *ngIf="getQuantity() == 0; else updateQuantity" (click)="addToCart();" class="btn btn-secondary btn-block">Add to Cart</button>
         <ng-template #updateQuantity>
           <div class="row no-gutters">
-            <div class="col-2">
+            <div class="col-2" (click)="removeFromCart()">
               <button class="btn btn-secondary btn-block">-</button> 
             </div>
             <div class="col text-center ">
-         in cart
+              {{getQuantity()}} in cart
             </div>
-            <div class="col-2">
+            <div class="col-2" (click)="addToCart()">
               <button class="btn btn-secondary btn-block">+</button> 
             </div>
           </div>

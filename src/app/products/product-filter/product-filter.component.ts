@@ -1,23 +1,25 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { CategoryService } from 'src/app/_services/category.service';
 
 @Component({
   selector: 'product-filter',
   templateUrl: './product-filter.component.html',
   styleUrls: ['./product-filter.component.css']
 })
-export class ProductFilterComponent implements OnInit, OnDestroy {
+export class ProductFilterComponent implements OnInit{
 
   categories: any[];
   subscribe2: Subscription;
   @Input('category') category: any;
-  constructor() { }
+  constructor(private categoryService: CategoryService) { 
 
-  
-  ngOnDestroy(): void {
-    throw new Error("Method not implemented.");
+    categoryService.getAll().subscribe((x: any) => {
+      this.categories = x;
+      console.log(this.categories);
+    })
+
   }
-
   ngOnInit(): void {
   }
 
