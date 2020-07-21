@@ -33,12 +33,12 @@ export class ProductFormComponent implements OnInit {
   }
 
   save(){
-    console.log(this.product)
-    // this.productService.create(this.product).subscribe(x => {
-    //   this.alertify.success('Product Added Successfully!');
-    // }, error => {
-    //   this.alertify.error('Product could not be added!')
-    // })
+    console.log(this.product);
+    this.productService.create(this.product).subscribe(x => {
+      this.alertify.success('Product Added Successfully!');
+    }, error => {
+      this.alertify.error('Product could not be added!')
+    })
   }
 
   delete(){
