@@ -18,4 +18,8 @@ export class ProductService {
     return this.http.get('http://localhost:3000/products');
   }
 
+  get(id){
+    return this.http.get('http://localhost:3000/products/'+id);
+  }
+
 }

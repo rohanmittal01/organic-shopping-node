@@ -26,6 +26,7 @@ import { RegisterComponent } from './register/register.component';
 import { AuthService } from './_services/auth.service';
 import { AlertifyService } from './_services/alertify.service';
 import { LoggedinGuardService } from './_services/loggedin-guard.service';
+import { ProductFormComponent } from './product-form/product-form.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { LoggedinGuardService } from './_services/loggedin-guard.service';
     LoginComponent,
     ProductFilterComponent,
     ProductCardComponent,
-    RegisterComponent
+    RegisterComponent,
+    ProductFormComponent
   ],
   imports: [
     BrowserModule,
@@ -63,8 +65,8 @@ import { LoggedinGuardService } from './_services/loggedin-guard.service';
       {path: 'order-success/:id', component: OrderSuccessComponent, canActivate: [AuthGuardService]},
       {path: 'my/orders', component: MyOrdersComponent, canActivate: [AuthGuardService]},
 
-    //  {path: 'admin/products/new', component: ProductFormComponent},
-    //   {path: 'admin/products/:id', component: ProductFormComponet},
+     {path: 'admin/products/new', component: ProductFormComponent},
+      {path: 'admin/products/:id', component: ProductFormComponent},
       {path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuardService]},
       {path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuardService]}
     ])
