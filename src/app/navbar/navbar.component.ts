@@ -20,11 +20,11 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let token = localStorage.getItem('token');
-    this.authService.decodedToken = this.jwtHelper.decodeToken(token);
-    console.log(this.jwtHelper.decodeToken(token));
-      // this.authService.logged = true;
-    this.name = this.authService.decodedToken.name;
+    // let token = localStorage.getItem('token');
+    // this.authService.decodedToken = this.jwtHelper.decodeToken(token);
+    // console.log(this.jwtHelper.decodeToken(token));
+    //   // this.authService.logged = true;
+    // this.name = this.authService.decodedToken.name;
   }
 
   logout(){

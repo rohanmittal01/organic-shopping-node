@@ -19,12 +19,12 @@ export class ProductFormComponent implements OnInit {
       
       categoryService.getAll().subscribe(categories => {
         this.categories$ = categories;
+        console.log(categories);
+        this.getProductInfo();
       })
       this.id = this.route.snapshot.paramMap.get('id');
 
-      if (this.id){
-        this.productService.get(this.id).subscribe(p => this.product = p);
-      }
+      
 
      }
 
@@ -32,16 +32,39 @@ export class ProductFormComponent implements OnInit {
 
   }
 
+  getProductInfo(){
+    if (this.id){
+      this.productService.get(this.id).subscribe(p => {
+        this.product = p;
+        console.log(p);
+      });
+    }
+  }
   save(){
     console.log(this.product);
+    if(this.id){
+      this.productService.update(this.id, this.product).subscribe(x => {
+        this.alertify.success('Product updated successfully!');
+        this.router.navigate(['/admin/products']);
+      }, error => {
+        this.alertify.error('Product could not be updated!');
+      })
+    }else{
     this.productService.create(this.product).subscribe(x => {
       this.alertify.success('Product Added Successfully!');
+      this.router.navigate(['/admin/products']);
     }, error => {
-      this.alertify.error('Product could not be added!')
-    })
+      this.alertify.error('Product could not be added!');
+    });
+  }
   }
 
   delete(){
-
+    this.productService.delete(this.id).subscribe(x => {
+      this.alertify.success('Product deleted successfully!');
+      this.router.navigate(['/admin/products']);
+    }, error => {
+      this.alertify.error('Product could not be deleted!')
+    });
   }
 }
