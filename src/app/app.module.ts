@@ -12,7 +12,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatFormFieldModule} from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-
+import  { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -38,6 +39,8 @@ import { ProductFormComponent } from './product-form/product-form.component';
 import { AdminDeliverPersonComponent } from './admin/admin-deliver-person/admin-deliver-person.component';
 import { AdminCategoriesComponent } from './admin/admin-categories/admin-categories.component';
 import { CategoryformComponent } from './categoryform/categoryform.component';
+import { DeliveryPersonFormComponent } from './delivery-person-form/delivery-person-form.component';
+import { ActiveDialogComponent } from './_dialogs/active-dialog/active-dialog.component';
 
 
 @NgModule({
@@ -59,7 +62,9 @@ import { CategoryformComponent } from './categoryform/categoryform.component';
     ProductFormComponent,
     AdminDeliverPersonComponent,
     AdminCategoriesComponent,
-    CategoryformComponent
+    CategoryformComponent,
+    DeliveryPersonFormComponent,
+    ActiveDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -77,6 +82,8 @@ import { CategoryformComponent } from './categoryform/categoryform.component';
     MatFormFieldModule,
     MatButtonModule,
     MatInputModule,
+    MatCheckboxModule,
+    MatDialogModule,
     RouterModule.forRoot([
       {path: '', component: ProductsComponent, canActivate: [AuthGuardService]},
       {path: 'products', component: ProductsComponent, canActivate: [AuthGuardService]},
@@ -95,7 +102,10 @@ import { CategoryformComponent } from './categoryform/categoryform.component';
       {path: 'admin/delivery-person', component: AdminDeliverPersonComponent, canActivate: [AuthGuardService]},
       {path: 'admin/categories/new', component: CategoryformComponent, canActivate: [AuthGuardService]},
       {path: 'admin/categories/:id', component: CategoryformComponent, canActivate: [AuthGuardService]},
-      {path: 'admin/categories', component: AdminCategoriesComponent, canActivate: [AuthGuardService]}
+      {path: 'admin/categories', component: AdminCategoriesComponent, canActivate: [AuthGuardService]},
+      {path: 'admin/deliveryperson/new', component: DeliveryPersonFormComponent, canActivate: [AuthGuardService]},
+      {path: 'admin/deliveryperson/:id', component: DeliveryPersonFormComponent, canActivate: [AuthGuardService]},
+      {path: 'admin/deliveryperson', component: AdminDeliverPersonComponent, canActivate: [AuthGuardService]}
     ])
   ],
   providers: [

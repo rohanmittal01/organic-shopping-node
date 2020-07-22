@@ -18,8 +18,8 @@ export class LoginComponent implements OnInit {
   jwtHelper: JwtHelperService;
   constructor(private authService: AuthService, private alertify: AlertifyService, private route: Router) { }
 
-  ngOnInit(): void {
-    if(this.authService.loggedIn){
+  ngOnInit(){
+    if (this.authService.loggedIn){
       this.route.navigate(['/']);
     }
   }
@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
   login(){
     console.log(this.model);
     this.authService.login(this.model).subscribe((next: any) => {
-      console.log(next)
+      console.log(next);
       this.alertify.success('Logged in successfully');
       
       // this.authService.logged = true;
@@ -35,11 +35,6 @@ export class LoginComponent implements OnInit {
       this.authService.decodedToken = this.jwtHelper.decodeToken(next.token);
       window.location.reload();
       this.route.navigate(['/']);
-
-      // this.f1();
-     
-              
-              
       const token = localStorage.getItem('token');
       console.log(token);
     }, error => {
