@@ -32,19 +32,37 @@
               paginatorRef.pageIndex * paginatorRef.pageSize + (i + 1)
             }}</mat-cell>
           </ng-container>
-      <ng-container matColumnDef="key">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Key</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{ element.key }}</mat-cell>
-      </ng-container>
       <ng-container matColumnDef="name">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
         <mat-cell *matCellDef="let element">{{ element.name }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="datejoined">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Date Joined</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.dateJoined }}</mat-cell>
+      </ng-container>
+      <!-- <ng-container matColumnDef="isAdmin">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Is Active?</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.isActive }}</mat-cell>
+      </ng-container> -->
+      <ng-container matColumnDef="isActive">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+          >Active?</mat-header-cell
+        >
+        <mat-cell *matCellDef="let element">
+          <mat-checkbox
+            class="example-margin"
+            
+            [ngModel]="element.isActive"
+            [checked]="element.isActive"
+            (ngModelChange)="openDialog(element._id, $event)"
+          ></mat-checkbox>
+        </mat-cell>
       </ng-container>
       <ng-container matColumnDef="$key">
         <mat-header-cell *matHeaderCellDef>Edit</mat-header-cell>
         <mat-cell *matCellDef="let element">
           <button mat-icon-button type="button">
-            <a [routerLink]="['/admin/categories/', element._id]"
+            <a [routerLink]="['/admin/deliveryperson/', element._id]"
               ><mat-icon>create</mat-icon></a
             >
           </button>

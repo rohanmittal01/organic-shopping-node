@@ -4,6 +4,7 @@ import { CategoryService } from '../_services/category.service';
 import { AlertifyService } from '../_services/alertify.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ActiveDialogComponent } from '../_dialogs/active-dialog/active-dialog.component';
+import { DeliveryPersonService } from '../_services/delivery-person.service';
 
 @Component({
   selector: 'app-delivery-person-form',
@@ -20,14 +21,15 @@ export class DeliveryPersonFormComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private categoryService: CategoryService,
+    private deliverypersonService: DeliveryPersonService,
     private alertify: AlertifyService,
     private dialog: MatDialog
   ) {
     this.id = this.route.snapshot.paramMap.get('id');
     if (this.id) {
-      categoryService.get(this.id).subscribe((categories) => {
+      deliverypersonService.get(this.id).subscribe((categories: any) => {
         this.deliveryperson = categories;
+        this.address = categories.address;
         console.log(categories);
       });
     }else{
@@ -38,46 +40,51 @@ export class DeliveryPersonFormComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  // save() {
-  //   console.log(this.product);
-  //   if (this.id) {
-  //     this.categoryService.update(this.id, this.product).subscribe(
-  //       (x) => {
-  //         this.alertify.success('Category updated successfully!');
-  //         this.router.navigate(['/admin/categories']);
-  //       },
-  //       (error) => {
-  //         this.alertify.error('Category could not be updated!');
-  //       }
-  //     );
-  //   } else {
-  //     this.categoryService.create(this.product).subscribe(
-  //       (x) => {
-  //         this.alertify.success('Category Added Successfully!');
-  //         this.router.navigate(['/admin/categories']);
-  //       },
-  //       (error) => {
-  //         this.alertify.error('Category could not be added!');
-  //       }
-  //     );
-  //   }
-  // }
-
-  save(){
+  save() {
     this.deliveryperson = {
-      name: this.deliveryperson.name,
-      dateJoined: new Date(Date()),
-      address: this.address,
-      isActive: this.deliveryperson.isActive
+          name: this.deliveryperson.name,
+          dateJoined: new Date(Date()),
+          address: this.address,
+          isActive: this.deliveryperson.isActive
+        }
+    if (this.id) {
+      this.deliverypersonService.update(this.id, this.deliveryperson).subscribe(
+        (x) => {
+          this.alertify.success('Category updated successfully!');
+          this.router.navigate(['/admin/delivery-person']);
+        },
+        (error) => {
+          this.alertify.error('Category could not be updated!');
+        }
+      );
+    } else {
+      this.deliverypersonService.create(this.deliveryperson).subscribe(
+        (x) => {
+          this.alertify.success('Category Added Successfully!');
+          this.router.navigate(['/admin/delivery-person']);
+        },
+        (error) => {
+          this.alertify.error('Category could not be added!');
+        }
+      );
     }
-    console.log(this.deliveryperson);
   }
 
+  // save(){
+  //   this.deliveryperson = {
+  //     name: this.deliveryperson.name,
+  //     dateJoined: new Date(Date()),
+  //     address: this.address,
+  //     isActive: this.deliveryperson.isActive
+  //   }
+  //   console.log(this.deliveryperson);
+  // }
+
   delete() {
-    this.categoryService.delete(this.id).subscribe(
+    this.deliverypersonService.delete(this.id).subscribe(
       (x) => {
         this.alertify.success('Category deleted successfully!');
-        this.router.navigate(['/admin/categories']);
+        this.router.navigate(['/admin/delivery-person']);
       },
       (error) => {
         this.alertify.error('Category could not be deleted!');

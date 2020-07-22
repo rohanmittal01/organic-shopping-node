@@ -24,8 +24,8 @@ export class DeliveryPersonService {
     return this.http.get(this.baseUrl + 'deliveryperson/' + id);
   }
 
-  update(id, product){
-    return this.http.patch(this.baseUrl + 'deliveryperson/' + id, product);
+  update(id, person){
+    return this.http.patch(this.baseUrl + 'deliveryperson/' + id, person);
   }
 
   delete(id){
