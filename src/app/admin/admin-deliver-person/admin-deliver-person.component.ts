@@ -74,15 +74,7 @@ export class AdminDeliverPersonComponent{
         // modData = this.listData.filteredData.filter(x => x._id == id);
       }
     });
-    // const dialogRef = this.dialog.open(ActiveDialogComponent, {
-    //   width: '250px',
-    //   data: {name: this.name, animal: this.animal}
-    // });
 
-    // dialogRef.afterClosed().subscribe(result => {
-    //   console.log('The dialog was closed');
-    //   // this.animal = result;
-    // });
   }
    applyFilter(){
     this.listData.filter = this.searchKey.toLowerCase();

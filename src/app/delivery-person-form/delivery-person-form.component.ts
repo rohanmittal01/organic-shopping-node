@@ -70,15 +70,7 @@ export class DeliveryPersonFormComponent implements OnInit {
     }
   }
 
-  // save(){
-  //   this.deliveryperson = {
-  //     name: this.deliveryperson.name,
-  //     dateJoined: new Date(Date()),
-  //     address: this.address,
-  //     isActive: this.deliveryperson.isActive
-  //   }
-  //   console.log(this.deliveryperson);
-  // }
+
 
   delete() {
     this.deliverypersonService.delete(this.id).subscribe(
