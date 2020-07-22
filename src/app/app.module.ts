@@ -35,6 +35,9 @@ import { AuthService } from './_services/auth.service';
 import { AlertifyService } from './_services/alertify.service';
 import { LoggedinGuardService } from './_services/loggedin-guard.service';
 import { ProductFormComponent } from './product-form/product-form.component';
+import { AdminDeliverPersonComponent } from './admin/admin-deliver-person/admin-deliver-person.component';
+import { AdminCategoriesComponent } from './admin/admin-categories/admin-categories.component';
+import { CategoryformComponent } from './categoryform/categoryform.component';
 
 
 @NgModule({
@@ -53,7 +56,10 @@ import { ProductFormComponent } from './product-form/product-form.component';
     ProductFilterComponent,
     ProductCardComponent,
     RegisterComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    AdminDeliverPersonComponent,
+    AdminCategoriesComponent,
+    CategoryformComponent
   ],
   imports: [
     BrowserModule,
@@ -85,7 +91,11 @@ import { ProductFormComponent } from './product-form/product-form.component';
      {path: 'admin/products/new', component: ProductFormComponent},
       {path: 'admin/products/:id', component: ProductFormComponent},
       {path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuardService]},
-      {path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuardService]}
+      {path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuardService]},
+      {path: 'admin/delivery-person', component: AdminDeliverPersonComponent, canActivate: [AuthGuardService]},
+      {path: 'admin/categories/new', component: CategoryformComponent, canActivate: [AuthGuardService]},
+      {path: 'admin/categories/:id', component: CategoryformComponent, canActivate: [AuthGuardService]},
+      {path: 'admin/categories', component: AdminCategoriesComponent, canActivate: [AuthGuardService]}
     ])
   ],
   providers: [
