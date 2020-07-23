@@ -20,7 +20,9 @@ export class ProductCardComponent implements OnInit {
     private cartService: ShoppingCartService,
     private alertify: AlertifyService,
     private authService: AuthService
-  ) {}
+  ) {
+    
+  }
 
   ngOnInit(): void {}
 
@@ -29,15 +31,16 @@ export class ProductCardComponent implements OnInit {
   }
 
   addToCart() {
+    // console.log(this.product);
     // tslint:disable-next-line: triple-equals
-    if (this.cartService.cart != [] && this.cartService.cart != null) {
-      console.log('here');
+    console.log(this.cartService.cart);
+    if (this.cartService.cart != [] && this.cartService.cart != undefined) {
+      console.log('hee')
       let data;
       this.productService.get(this.product._id).subscribe((x) => {
         data = x;
         data.quantity = 1;
         data.totalPrice = data.price;
-        console.log(data);
         this.cartService.addFromShoppingCart(data).subscribe(
           (x) => {},
           (error) => {
@@ -46,13 +49,12 @@ export class ProductCardComponent implements OnInit {
         );
       });
     }else{
-      console.log('here 2');
+      console.log('heê333333')
       let data;
       this.productService.get(this.product._id).subscribe((x) => {
         data = x;
         data.quantity = 1;
         data.totalPrice = data.price;
-        console.log(data);
         data = {
           userId: this.authService.decodedToken._id,
           items: [data]
