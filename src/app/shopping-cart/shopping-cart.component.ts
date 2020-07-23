@@ -14,9 +14,7 @@ export class ShoppingCartComponent implements OnInit {
   shoppingCartItemCount = 0;
   totalPrice = 0;
   constructor(private cartService: ShoppingCartService, private productService: ProductService, private alertify: AlertifyService) {
-
     this.dataRetrieval();
-   
    }
 
   ngOnInit(): void {
@@ -27,8 +25,6 @@ export class ShoppingCartComponent implements OnInit {
   dataRetrieval(){
     this.cartService.getCart().subscribe(x => {
       this.cartData = x;
-      console.log('cart');
-      console.log(this.cartData);
       this.getShoppingCartItemCount();
       this.getTotalPrice();
     });
@@ -38,7 +34,6 @@ export class ShoppingCartComponent implements OnInit {
     this.shoppingCartItemCount = 0;
     // tslint:disable-next-line: forin
     for (const productId in this.cartData.items){
-      console.log(this.cartData.items[productId].quantity);
       this.shoppingCartItemCount += this.cartData.items[productId].quantity;
     }
     console.log(this.shoppingCartItemCount);
@@ -48,14 +43,15 @@ export class ShoppingCartComponent implements OnInit {
     this.totalPrice = 0;
     // tslint:disable-next-line: forin
     for (const productId in this.cartData.items) {
-      console.log(this.cartData.items[productId]);
       this.totalPrice += (this.cartData.items[productId].price * this.cartData.items[productId].quantity);
     }
    // console.log(this.totalPrice);
   }
 
   addToCart(cartData){
-
+    
+    console.log(this.cartData.items.push(cartData));
+    console.log(this.cartData);
   }
 
   removeFromCart(cartData){

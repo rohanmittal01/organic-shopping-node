@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from './_services/auth.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { ShoppingCartService } from './_services/shopping-cart.service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class AppComponent {
 
   jwtHelper = new JwtHelperService();
-  constructor(private authService: AuthService){}
+  constructor(private authService: AuthService, private cartService: ShoppingCartService){}
 
   // tslint:disable-next-line: use-lifecycle-interface
   ngOnInit(): void {
@@ -19,6 +20,11 @@ export class AppComponent {
       const token = localStorage.getItem('token');
       this.authService.decodedToken = this.jwtHelper.decodeToken(token);
       console.log(this.jwtHelper.decodeToken(token));
+      this.cartService.getCart().subscribe(x => {
+        this.cartService.cart = x;
+        console.log(this.cartService.cart);
+      });
+      
       // this.authService.logged = true;
     }
   }

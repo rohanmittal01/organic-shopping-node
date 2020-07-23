@@ -30,4 +30,8 @@ export class ProductService {
   delete(id){
     return this.http.delete(this.baseUrl + 'products/' + id);
   }
+
+  addToCart(id){
+
+  }
 }
