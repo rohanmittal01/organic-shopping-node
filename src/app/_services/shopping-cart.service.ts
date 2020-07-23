@@ -17,6 +17,31 @@ export class ShoppingCartService {
      return this.http.get(this.baseUrl + this.authService.decodedToken._id);
    }
 
+   addToCart(product){
+    this.updateItemQuantity(product, 1);
+   }
+
+   removeFromCart(product){
+    this.updateItemQuantity(product, -1);
+   }
+
+   private updateItemQuantity(item, change){
+     console.log(item._id);
+     console.log(this.cart.items[0]._id);
+     console.log('----------------------');
+     // tslint:disable-next-line: forin
+     for(let product in this.cart.items){
+      if(this.cart.items[product]._id == item._id){
+        this.cart.items[product].quantity += change;
+        this.cart.items[product].totalPrice = this.cart.items[product].quantity * this.cart.items[product].price;
+        this.http.patch(this.baseUrl + this.authService.decodedToken._id, this.cart).subscribe(x => {
+          this.cart = x;
+        });
+      }
+     }
+    
+   }
+
    // Called on clicking Add To Cart
    addFromShoppingCart(product){
     this.cart.items.push(product);

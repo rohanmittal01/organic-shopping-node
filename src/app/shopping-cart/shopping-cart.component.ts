@@ -49,13 +49,26 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   addToCart(cartData){
-    
-    console.log(this.cartData.items.push(cartData));
-    console.log(this.cartData);
+    this.cartService.addToCart(cartData);
+    this.updateQuantity(cartData, 1);
+   
+    // console.log(this.cartData.items.push(cartData));
+    // console.log(this.cartData);
   }
 
   removeFromCart(cartData){
+    this.cartService.removeFromCart(cartData);
+    this.updateQuantity(cartData, -1);
+  }
 
+  updateQuantity(cartData, change){
+    for(let product in this.cartData.items){
+      if(this.cartData.items[product]._id == cartData._id){
+        this.cartData.items[product].quantity += change;
+        this.getTotalPrice();
+        return;
+      }
+     }
   }
 
 
