@@ -32,11 +32,9 @@ export class LoginComponent implements OnInit {
       
       // this.authService.logged = true;
       localStorage.setItem('token', next.token);
-      this.authService.decodedToken = this.jwtHelper.decodeToken(next.token);
+      // this.authService.decodedToken = this.jwtHelper.decodeToken(next.token);
       window.location.reload();
       this.route.navigate(['/']);
-      const token = localStorage.getItem('token');
-      console.log(token);
     }, error => {
       console.log(error.error);
       this.alertify.error(error.error);

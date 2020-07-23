@@ -12,7 +12,7 @@ export class AuthGuardService  implements CanActivate {
 
   canActivate(router, state: RouterStateSnapshot){
 
-    if(this.authService.loggedIn()){
+    if (this.authService.loggedIn()){
       return true;
     }
     this.alertify.error("You shall not pass!");
