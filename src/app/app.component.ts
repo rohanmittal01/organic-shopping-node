@@ -21,7 +21,11 @@ export class AppComponent {
       this.authService.decodedToken = this.jwtHelper.decodeToken(token);
       console.log(this.jwtHelper.decodeToken(token));
       this.cartService.getCart().subscribe(x => {
+        if(x){
         this.cartService.cart = x;
+        }else{
+          this.cartService.cart = []
+        }
         console.log(this.cartService.cart);
       });
       

@@ -25,7 +25,11 @@ export class ShoppingCartService {
     return this.http.patch(this.baseUrl + this.authService.decodedToken._id, this.cart);
    }
 
-   
+
+   createShoppingCart(product){
+     return this.http.post(this.baseUrl, product);
+   }
+
 
   clearCart(){
     return this.http.delete(this.baseUrl + this.authService.decodedToken._id);
