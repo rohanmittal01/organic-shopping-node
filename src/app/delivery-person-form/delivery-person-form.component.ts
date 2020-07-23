@@ -5,14 +5,14 @@ import { AlertifyService } from '../_services/alertify.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ActiveDialogComponent } from '../_dialogs/active-dialog/active-dialog.component';
 import { DeliveryPersonService } from '../_services/delivery-person.service';
+import { AuthService } from '../_services/auth.service';
 
 @Component({
   selector: 'app-delivery-person-form',
   templateUrl: './delivery-person-form.component.html',
-  styleUrls: ['./delivery-person-form.component.css']
+  styleUrls: ['./delivery-person-form.component.css'],
 })
 export class DeliveryPersonFormComponent implements OnInit {
-
   categories$: any;
   deliveryperson: any = {};
   address: any = {};
@@ -23,7 +23,8 @@ export class DeliveryPersonFormComponent implements OnInit {
     private router: Router,
     private deliverypersonService: DeliveryPersonService,
     private alertify: AlertifyService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private authService: AuthService
   ) {
     this.id = this.route.snapshot.paramMap.get('id');
     if (this.id) {
@@ -32,32 +33,41 @@ export class DeliveryPersonFormComponent implements OnInit {
         this.address = categories.address;
         console.log(categories);
       });
-    }else{
+    } else {
       this.deliveryperson.isActive = true;
     }
-    
   }
 
   ngOnInit(): void {}
 
   save() {
     this.deliveryperson = {
-          name: this.deliveryperson.name,
-          phoneNumber: this.deliveryperson.phoneNumber,
-          dateJoined: new Date(Date()),
-          address: this.address,
-          isActive: this.deliveryperson.isActive
-        };
+      name: this.deliveryperson.name,
+      phoneNumber: this.deliveryperson.phoneNumber,
+      address: this.address,
+      isActive: this.deliveryperson.isActive,
+    };
+    if (!this.id) {
+      this.deliveryperson.dateJoined = new Date(Date());
+    }
     console.log(this.deliveryperson);
     if (this.id) {
-      this.deliverypersonService.update(this.id, this.deliveryperson).subscribe((x) => {
+      this.deliveryperson.modifiedDate = new Date(Date());
+      this.deliveryperson.modifiedBy = this.authService.decodedToken.email;
+      this.deliverypersonService.update(this.id, this.deliveryperson).subscribe(
+        (x) => {
           this.alertify.success('Category updated successfully!');
           this.router.navigate(['/admin/delivery-person']);
         },
         (error) => {
           this.alertify.error('Category could not be updated!');
-        });
+        }
+      );
     } else {
+      this.deliveryperson.dateAdded = new Date(Date())
+      this.deliveryperson.addedBy = this.authService.decodedToken.email;
+      this.deliveryperson.modifiedDate = new Date(Date())
+      this.deliveryperson.modifiedBy = this.authService.decodedToken.email;
       this.deliverypersonService.create(this.deliveryperson).subscribe(
         (x) => {
           this.alertify.success('Category Added Successfully!');
@@ -69,8 +79,6 @@ export class DeliveryPersonFormComponent implements OnInit {
       );
     }
   }
-
-
 
   delete() {
     this.deliverypersonService.delete(this.id).subscribe(
@@ -85,20 +93,20 @@ export class DeliveryPersonFormComponent implements OnInit {
   }
 
   openDialog(): void {
-    if(this.id){
-    let dialogRef = this.dialog.open(ActiveDialogComponent);
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('Dialog Result: ' + result);
-      if (result == 'Yes'){
-        this.alertify.success('Deliveryman activation status Confirmed.');
-       
-      }else if (result == 'No'){
-        // this.search();
-        this.deliveryperson.isActive = !this.deliveryperson.isActive
-        this.alertify.warning('Deliveryman activation status change declined.');
-      }
-    });
+    if (this.id) {
+      let dialogRef = this.dialog.open(ActiveDialogComponent);
+      dialogRef.afterClosed().subscribe((result) => {
+        console.log('Dialog Result: ' + result);
+        if (result == 'Yes') {
+          this.alertify.success('Deliveryman activation status Confirmed.');
+        } else if (result == 'No') {
+          // this.search();
+          this.deliveryperson.isActive = !this.deliveryperson.isActive;
+          this.alertify.warning(
+            'Deliveryman activation status change declined.'
+          );
+        }
+      });
+    }
   }
-  }
-
 }

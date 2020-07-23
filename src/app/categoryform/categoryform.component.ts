@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertifyService } from '../_services/alertify.service';
 import { CategoryService } from '../_services/category.service';
+import { AuthService } from '../_services/auth.service';
 
 @Component({
   selector: 'app-categoryform',
@@ -17,7 +18,8 @@ export class CategoryformComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private categoryService: CategoryService,
-    private alertify: AlertifyService
+    private alertify: AlertifyService,
+    private authService: AuthService
   ) {
     this.id = this.route.snapshot.paramMap.get('id');
     if (this.id) {
@@ -33,6 +35,8 @@ export class CategoryformComponent implements OnInit {
   save() {
     console.log(this.product);
     if (this.id) {
+      this.product.modifiedDate = new Date(Date());
+      this.product.modifiedBy = this.authService.decodedToken.email;
       this.categoryService.update(this.id, this.product).subscribe(
         (x) => {
           this.alertify.success('Category updated successfully!');
@@ -43,6 +47,10 @@ export class CategoryformComponent implements OnInit {
         }
       );
     } else {
+      this.product.dateAdded = new Date(Date())
+      this.product.addedBy = this.authService.decodedToken.email;
+      this.product.modifiedDate = new Date(Date())
+      this.product.modifiedBy = this.authService.decodedToken.email;
       this.categoryService.create(this.product).subscribe(
         (x) => {
           this.alertify.success('Category Added Successfully!');

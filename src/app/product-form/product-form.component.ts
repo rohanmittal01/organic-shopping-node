@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from '../_services/category.service';
 import { ProductService } from '../_services/product.service';
 import { AlertifyService } from '../_services/alertify.service';
+import { AuthService } from '../_services/auth.service';
 
 @Component({
   selector: 'app-product-form',
@@ -15,7 +16,7 @@ export class ProductFormComponent implements OnInit {
   product: any = {};
   id;
   constructor(private route: ActivatedRoute, private router: Router,
-              private categoryService: CategoryService, private productService: ProductService, private alertify: AlertifyService) {
+              private categoryService: CategoryService, private productService: ProductService, private alertify: AlertifyService, private authService: AuthService) {
       
       categoryService.getAll().subscribe(categories => {
         this.categories$ = categories;
@@ -43,6 +44,8 @@ export class ProductFormComponent implements OnInit {
   save(){
     console.log(this.product);
     if(this.id){
+      this.product.modifiedDate = new Date(Date());
+      this.product.modifiedBy = this.authService.decodedToken.email;
       this.productService.update(this.id, this.product).subscribe(x => {
         this.alertify.success('Product updated successfully!');
         this.router.navigate(['/admin/products']);
@@ -50,6 +53,11 @@ export class ProductFormComponent implements OnInit {
         this.alertify.error('Product could not be updated!');
       })
     }else{
+      this.product.dateAdded = new Date(Date())
+      this.product.addedBy = this.authService.decodedToken.email;
+      this.product.modifiedDate = new Date(Date())
+      this.product.modifiedBy = this.authService.decodedToken.email;
+      console.log(this.product);
     this.productService.create(this.product).subscribe(x => {
       this.alertify.success('Product Added Successfully!');
       this.router.navigate(['/admin/products']);
