@@ -40,6 +40,10 @@
         <mat-header-cell *matHeaderCellDef mat-sort-header>Date Joined</mat-header-cell>
         <mat-cell *matCellDef="let element">{{ element.dateJoined }}</mat-cell>
       </ng-container>
+      <ng-container matColumnDef="phoneNumber">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Contact</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.phoneNumber }}</mat-cell>
+      </ng-container>
       <!-- <ng-container matColumnDef="isAdmin">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Is Active?</mat-header-cell>
         <mat-cell *matCellDef="let element">{{ element.isActive }}</mat-cell>

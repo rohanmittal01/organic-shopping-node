@@ -11,61 +11,79 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 @Component({
   selector: 'app-admin-deliver-person',
   templateUrl: './admin-deliver-person.component.html',
-  styleUrls: ['./admin-deliver-person.component.css']
+  styleUrls: ['./admin-deliver-person.component.css'],
 })
-export class AdminDeliverPersonComponent{
-
+export class AdminDeliverPersonComponent {
   deliveryListCollection: Observable<any[]>;
   delivery: any = [];
   filteredDelivery: any[];
-  
+
   listData: MatTableDataSource<any>;
-  displayedColumns: string[] = ['sno', 'name', 'datejoined', 'isActive', '$key'];
+  displayedColumns: string[] = [
+    'sno',
+    'name',
+    'datejoined',
+    'phoneNumber',
+    'isActive',
+    '$key',
+  ];
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   searchKey: string;
   array: any;
 
-  constructor(private deliveryService: DeliveryPersonService, private dialog: MatDialog, private alertify: AlertifyService) {
+  constructor(
+    private deliveryService: DeliveryPersonService,
+    private dialog: MatDialog,
+    private alertify: AlertifyService
+  ) {
     this.getDeliveryPerson();
-    
-   }
+  }
 
-   getDeliveryPerson(){
-    this.deliveryService.getAll().subscribe(delivery => {
+  getDeliveryPerson() {
+    this.deliveryService.getAll().subscribe((delivery) => {
       console.log(delivery);
       this.array = delivery;
-      this.listData = new MatTableDataSource(this.array);
+      console.log(this.array);
+      let data = this.array;
+      let d: any;
+      // tslint:disable-next-line: forin
+      for ( d in data ){
+        data[d].dateJoined = new Date(data[d].dateJoined).toLocaleString();
+        console.log(data[d].dateJoined);
+      }
+      console.log(data);
+      this.listData = new MatTableDataSource(data);
       this.listData.sort = this.sort;
       this.listData.paginator = this.paginator;
-  })
-   }
+    });
+  }
 
-
-   modifyActive(id){
-     console.log(this.array);
-    let modData = this.array.filter(x => x._id == id);
+  modifyActive(id) {
+    console.log(this.array);
+    // tslint:disable-next-line: triple-equals
+    const modData = this.array.filter((x) => x._id == id);
     modData[0].isActive = !modData[0].isActive;
     console.log(modData[0]);
     this.deliveryService.update(id, modData[0]).subscribe(
       () => {
         this.alertify.success('Modified Successfully');
         // this.router.navigate(['/admin']);
-        
       },
       (error) => {
         this.alertify.error(error);
       }
     );
-   }
-   openDialog(id, e): void {
-    let dialogRef = this.dialog.open(ActiveDialogComponent);
-    dialogRef.afterClosed().subscribe(result => {
+  }
+  openDialog(id, e): void {
+    const dialogRef = this.dialog.open(ActiveDialogComponent);
+    dialogRef.afterClosed().subscribe((result) => {
       console.log('Dialog Result: ' + result);
-      if (result == 'Yes'){
+      // tslint:disable-next-line: triple-equals
+      if (result == 'Yes') {
         this.modifyActive(id);
-
-      }else if (result == 'No'){
+      // tslint:disable-next-line: triple-equals
+      } else if (result == 'No') {
         // let modData = this.listData.filteredData.filter(x => x._id == id);
         // console.log('role name: ' + modData[0].isActive);
         // console.log("current: "+e);
@@ -74,14 +92,12 @@ export class AdminDeliverPersonComponent{
         // modData = this.listData.filteredData.filter(x => x._id == id);
       }
     });
-
   }
-   applyFilter(){
+  applyFilter() {
     this.listData.filter = this.searchKey.toLowerCase();
   }
-  onSearchClear(){
+  onSearchClear() {
     this.searchKey = '';
     this.applyFilter();
   }
-
 }

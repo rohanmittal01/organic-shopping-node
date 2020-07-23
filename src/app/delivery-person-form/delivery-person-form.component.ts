@@ -43,20 +43,20 @@ export class DeliveryPersonFormComponent implements OnInit {
   save() {
     this.deliveryperson = {
           name: this.deliveryperson.name,
+          phoneNumber: this.deliveryperson.phoneNumber,
           dateJoined: new Date(Date()),
           address: this.address,
           isActive: this.deliveryperson.isActive
-        }
+        };
+    console.log(this.deliveryperson);
     if (this.id) {
-      this.deliverypersonService.update(this.id, this.deliveryperson).subscribe(
-        (x) => {
+      this.deliverypersonService.update(this.id, this.deliveryperson).subscribe((x) => {
           this.alertify.success('Category updated successfully!');
           this.router.navigate(['/admin/delivery-person']);
         },
         (error) => {
           this.alertify.error('Category could not be updated!');
-        }
-      );
+        });
     } else {
       this.deliverypersonService.create(this.deliveryperson).subscribe(
         (x) => {

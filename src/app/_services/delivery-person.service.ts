@@ -10,9 +10,9 @@ export class DeliveryPersonService {
   baseUrl = environment.apiUrl;
   constructor(private http: HttpClient) { }
 
-  create(category){
+  create(deliveryperson){
 
-    return this.http.post(this.baseUrl + 'deliveryperson', category);
+    return this.http.post(this.baseUrl + 'deliveryperson', deliveryperson);
 
   }
 
