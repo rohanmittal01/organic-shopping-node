@@ -65,6 +65,9 @@ export class ShoppingCartComponent implements OnInit {
     for(let product in this.cartData.items){
       if(this.cartData.items[product]._id == cartData._id){
         this.cartData.items[product].quantity += change;
+        if (this.cartData.items[product].quantity == 0) {
+          this.cartData.items.splice(product, 1);
+        }
         this.getTotalPrice();
         return;
       }
