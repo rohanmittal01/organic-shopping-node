@@ -15,9 +15,7 @@ export class ShoppingCartSummaryComponent implements OnInit {
   taxes = 0;
   deliveryCharges = 0;
   constructor(private cartService: ShoppingCartService, private alertify: AlertifyService) { 
-    this.dataRetrieval().then(x => {
-      
-    });
+    this.dataRetrieval()
   }
 
   ngOnInit(): void {
@@ -29,7 +27,6 @@ export class ShoppingCartSummaryComponent implements OnInit {
       this.cartData = x;
       this.getShoppingCartItemCount();
       this.getTotalPrice();
-      console.log(this.cartData);
     });
   }
 
@@ -52,7 +49,6 @@ export class ShoppingCartSummaryComponent implements OnInit {
     this.totalPrice = this.totalPrice*1.05;
       this.taxes = this.totalPrice * 0.05;
     if(this.totalPrice < 300){
-        console.log(this.totalPrice);
         this.deliveryCharges = 20;
         this.totalPrice += this.deliveryCharges;
       }
