@@ -1,0 +1,40 @@
+<div class="card">
+    <div *ngIf="!cartData" class="card-body">
+        <h5 class="card-title">Order Summary</h5>
+        Loading...
+    </div>
+    <div *ngIf="cartData" class="card-body">
+      <h5 class="card-title">Order Summary</h5>
+      <p class="card-text">
+        You have {{ shoppingCartItemCount }} items in your shopping cart.
+      </p>
+      <ul class="list-group list-group-flush">
+        <li *ngFor="let cartData of cartData.items" class="list-group-item">
+          {{ cartData.quantity }} x
+          {{ cartData.title }}
+          <div class="float-right">
+            {{ cartData.quantity * cartData.price | currency:'INR'}}
+          </div>
+        </li>
+        <li class="list-group-item font-weight-bold">
+            Tax (5%)
+            <div class="float-right">
+              {{taxes | currency:'INR'}}
+            </div>
+          </li>
+          <li class="list-group-item font-weight-bold">
+            Delivery Charges
+            <div class="float-right">
+              {{deliveryCharges | currency:'INR'}}
+            </div>
+          </li>
+        <li class="list-group-item font-weight-bold">
+          Total
+          <div class="float-right">
+            {{totalPrice | currency:'INR'}}
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  

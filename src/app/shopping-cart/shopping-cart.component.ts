@@ -13,7 +13,7 @@ export class ShoppingCartComponent implements OnInit {
   cartData;
   shoppingCartItemCount = 0;
   totalPrice = 0;
-  constructor(private cartService: ShoppingCartService, private productService: ProductService, private alertify: AlertifyService) {
+  constructor(private cartService: ShoppingCartService, private alertify: AlertifyService) {
     this.dataRetrieval();
    }
 

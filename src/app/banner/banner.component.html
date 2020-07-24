@@ -1,0 +1,12 @@
+<div class="mall-slide">
+    <div class="slid-content">
+        <div class="mall-show-slide fade" *ngFor="let item of Imagedata;">
+            <img src="{{item}}" style="width:100%">
+        </div>
+        <div class="mall-carousel-ind">
+            <ul>
+                <li *ngFor="let item of Imagedata; let i = index;" [class.mall-this]="startIndex - 1 === i"></li>
+            </ul>
+        </div>
+    </div>
+</div>

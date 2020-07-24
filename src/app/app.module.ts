@@ -41,6 +41,8 @@ import { AdminCategoriesComponent } from './admin/admin-categories/admin-categor
 import { CategoryformComponent } from './categoryform/categoryform.component';
 import { DeliveryPersonFormComponent } from './delivery-person-form/delivery-person-form.component';
 import { ActiveDialogComponent } from './_dialogs/active-dialog/active-dialog.component';
+import { BannerComponent } from './banner/banner.component';
+import { ShoppingCartSummaryComponent } from './shopping-cart-summary/shopping-cart-summary.component';
 
 
 @NgModule({
@@ -64,7 +66,9 @@ import { ActiveDialogComponent } from './_dialogs/active-dialog/active-dialog.co
     AdminCategoriesComponent,
     CategoryformComponent,
     DeliveryPersonFormComponent,
-    ActiveDialogComponent
+    ActiveDialogComponent,
+    BannerComponent,
+    ShoppingCartSummaryComponent
   ],
   imports: [
     BrowserModule,
