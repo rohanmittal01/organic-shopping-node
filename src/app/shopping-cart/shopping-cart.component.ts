@@ -11,9 +11,11 @@ import { AlertifyService } from '../_services/alertify.service';
 export class ShoppingCartComponent implements OnInit {
 
   cartData;
-  shoppingCartItemCount = 0;
+  shoppingCartItemCount;
   totalPrice = 0;
+  dataRetrieved = false;
   constructor(private cartService: ShoppingCartService, private alertify: AlertifyService) {
+    console.log('count ' + this.shoppingCartItemCount);
     this.dataRetrieval();
    }
 
@@ -25,8 +27,11 @@ export class ShoppingCartComponent implements OnInit {
   dataRetrieval(){
     this.cartService.getCart().subscribe(x => {
       this.cartData = x;
+      this.dataRetrieved = true;
       this.getShoppingCartItemCount();
       this.getTotalPrice();
+    }, error => {
+      this.dataRetrieved = true;
     });
   }
 
@@ -51,7 +56,7 @@ export class ShoppingCartComponent implements OnInit {
   addToCart(cartData){
     this.cartService.addToCart(cartData);
     this.updateQuantity(cartData, 1);
-   
+
     // console.log(this.cartData.items.push(cartData));
     // console.log(this.cartData);
   }
@@ -62,9 +67,11 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   updateQuantity(cartData, change){
-    for(let product in this.cartData.items){
-      if(this.cartData.items[product]._id == cartData._id){
+    for (const product in this.cartData.items){
+      // tslint:disable-next-line: triple-equals
+      if (this.cartData.items[product]._id == cartData._id){
         this.cartData.items[product].quantity += change;
+        // tslint:disable-next-line: triple-equals
         if (this.cartData.items[product].quantity == 0) {
           this.cartData.items.splice(product, 1);
         }

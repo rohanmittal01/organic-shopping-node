@@ -11,6 +11,7 @@ import { ShoppingCartService } from '../_services/shopping-cart.service';
 export class NavbarComponent implements OnInit {
 
   jwtHelper: JwtHelperService;
+  // tslint:disable-next-line: ban-types
   loggedIn: Boolean = false;
   isAdmin = false;
   name;

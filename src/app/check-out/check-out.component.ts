@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ShoppingCartService } from '../_services/shopping-cart.service';
 import { AuthService } from '../_services/auth.service';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -19,7 +21,8 @@ export class CheckOutComponent implements OnInit {
   deliveryCharges = 0;
   constructor(
     private cartService: ShoppingCartService,
-    private authService: AuthService
+    private authService: AuthService,
+    private http: HttpClient
   ) {
     this.dataRetrieval();
   }
@@ -83,5 +86,10 @@ export class CheckOutComponent implements OnInit {
       deliveryPerson: 'NA'
     };
     console.log(order);
+    this.http.post(environment.apiUrl + 'sendmail', order);
+  }
+
+  sendMail(){
+    
   }
 }

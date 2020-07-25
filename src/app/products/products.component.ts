@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ShoppingCartService } from '../_services/shopping-cart.service';
 
 @Component({
+  // tslint:disable-next-line: component-selector
   selector: 'products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
@@ -30,7 +31,7 @@ export class ProductsComponent implements OnInit {
   getCart(){
     this.cartService.getCart().subscribe((data: any) => {
       this.cart = data;
-    })
+    });
   }
 
   getProducts(){
@@ -40,11 +41,12 @@ export class ProductsComponent implements OnInit {
       this.filter();
     });
   }
-  
+
   filter(){
     this.route.queryParamMap.subscribe(params => {
       this.category = params.get('category');
       this.filteredProducts = (this.category) ?
+        // tslint:disable-next-line: triple-equals
         this.productListCollection.filter((p: { category: string; }) => p.category.toLowerCase() == this.category.toLowerCase()) :
         this.productListCollection;
       // console.log(this.category);

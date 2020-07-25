@@ -7,6 +7,13 @@
     height: 400px;
     width: 200px;
 }
+
+img {
+    height: 200px;
+    max-width: none;
+    min-width: 200px;
+    object-fit: cover;
+}
 /* img{
     height: 200px;
 } */

@@ -14,7 +14,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">Key</span>
                           </div>
-                        <input required [(ngModel)]="product.key" #key="ngModel"  name="key" id="key" type="text" class="form-control">
+                        <input autofocus required [(ngModel)]="product.key" #key="ngModel"  name="key" id="key" type="text" class="form-control">
                         </div>
                         <div class="alert alert-danger" *ngIf="key.touched && key.invalid">Key is required.</div>
                     </div>

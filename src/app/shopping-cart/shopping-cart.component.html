@@ -1,10 +1,13 @@
 <h1>Shopping Cart</h1>
 <ng-container>
+  <p *ngIf="!dataRetrieved">
+    Loading...
+  </p>
   <p *ngIf="shoppingCartItemCount; else noData">
     You have {{ shoppingCartItemCount }} item(s) in your shopping cart.
   </p>
-  <ng-template #noData >
-    <pre class="noData">
+  <ng-template #noData  >
+    <pre class="noData" *ngIf="dataRetrieved">
       Sorry!
       No items in Cart.
       <button class="btn btn-danger"><a routerLink="/" class="noDataButton">Add Items to Cart</a></button>

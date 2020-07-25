@@ -44,6 +44,7 @@ export class DeliveryPersonFormComponent implements OnInit {
     this.deliveryperson = {
       name: this.deliveryperson.name,
       phoneNumber: this.deliveryperson.phoneNumber,
+      gender: this.deliveryperson.gender,
       address: this.address,
       isActive: this.deliveryperson.isActive,
     };

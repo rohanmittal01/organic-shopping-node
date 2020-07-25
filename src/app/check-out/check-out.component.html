@@ -5,6 +5,7 @@
       <div class="form-group">
         <label for="">Name</label>
         <input
+          autofocus
           #name="ngModel"
           name="name"
           [(ngModel)]="shipping.name"
@@ -112,6 +113,7 @@
       <p *ngIf="totalPrice==0">Your shopping cart is empty!</p>
     </form>
     <hr>
+    <button type="button" class="btn" (click)="sendMail()">Mail</button>
   </div>
   <div class="col-sm-6 mt-2">
       <shopping-cart-summary></shopping-cart-summary>

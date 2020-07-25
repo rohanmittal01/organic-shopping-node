@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col">
-        <button type="button"  class="btn btn-info" routerLink="/admin/categories">    
+        <button type="button"  class="btn btn-info" routerLink="/admin/delivery-person">    
             <span class="material-icons">
                 arrow_back
           </span>
@@ -14,11 +14,21 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Name *</span>
                               </div>
-                            <input required [(ngModel)]="deliveryperson.name" #name="ngModel" name="name" id="name" type="text" class="form-control">
+                            <input autofocus required [(ngModel)]="deliveryperson.name" #name="ngModel" name="name" id="name" type="text" class="form-control">
                         </div>
                             <div class="alert alert-danger" *ngIf="name.touched && name.invalid">
                                 <div *ngIf="name.errors.required">Name is required.</div>
                             </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <select required [(ngModel)]="deliveryperson.gender" #gender="ngModel" name="gender" id="gender" type="text" class="form-control">
+                            <option value=""></option>
+                            <option>Male</option>
+                            <option>Female</option>
+                            <option>Others</option>
+                        </select>
+                        <div class="alert alert-danger" *ngIf="gender.touched && gender.invalid">Gender is required.</div>
                     </div>
                     <div class="form-group">
                         <!-- <label for="name">Name</label> -->
