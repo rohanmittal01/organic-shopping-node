@@ -16,20 +16,25 @@ export class ProductCardComponent implements OnInit {
   // tslint:disable-next-line: no-input-rename
   @Input('show-actions') showActions = true;
   // tslint:disable-next-line: no-input-rename
-  @Input('shopping-cart') shoppingCart;
+  // @Input('shopping-cart') shoppingCart;
+  shoppingCart;
 
   quantity = 0;
+
+
   constructor(
     private productService: ProductService,
     private cartService: ShoppingCartService,
     private alertify: AlertifyService,
     private authService: AuthService
   ) {
+    this.shoppingCart = cartService.cart;
   }
 
   ngOnInit(): void {}
 
   getQuantity() {
+    this.shoppingCart = this.cartService.cart;
     // console.log(this.shoppingCart)
     if (!this.shoppingCart){
       return 0;
@@ -100,6 +105,9 @@ export class ProductCardComponent implements OnInit {
     this.quantity = this.quantity + 1;
     console.log(this.quantity);
     this.cartService.addToCart(this.product);
+    this.getQuantity();
+    console.log(this.shoppingCart);
+
   }
 
 
@@ -107,5 +115,6 @@ export class ProductCardComponent implements OnInit {
   removeFromCart() {
     this.quantity = this.quantity - 1;
     this.cartService.removeFromCart(this.product);
+    this.getQuantity();
   }
 }

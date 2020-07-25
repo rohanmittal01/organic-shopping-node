@@ -18,12 +18,12 @@ export class NavbarComponent implements OnInit {
   shoppingCartItemCount = 0;
   constructor(public authService: AuthService, private cartService: ShoppingCartService) {
     this.loggedIn = this.authService.loggedIn();
-
+    this.cartData = this.cartService.cart;
     // this.isAdmin = authService.decodedToken.isAdmin
 
   }
 
-  async ngOnInit(){
+  ngOnInit(){
     // let token = localStorage.getItem('token');
     // this.authService.decodedToken = this.jwtHelper.decodeToken(token);
     // console.log(this.jwtHelper.decodeToken(token));
