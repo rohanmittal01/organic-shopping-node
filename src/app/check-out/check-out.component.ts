@@ -3,6 +3,7 @@ import { ShoppingCartService } from '../_services/shopping-cart.service';
 import { AuthService } from '../_services/auth.service';
 
 @Component({
+  // tslint:disable-next-line: component-selector
   selector: 'check-out',
   templateUrl: './check-out.component.html',
   styleUrls: ['./check-out.component.css'],
@@ -52,7 +53,7 @@ export class CheckOutComponent implements OnInit {
 
   checkOutPressed(data) {
     console.log(data);
-    let itemsData = [];
+    const itemsData = [];
     // tslint:disable-next-line: forin
     for (const id in this.cartData.items) {
       itemsData.push({

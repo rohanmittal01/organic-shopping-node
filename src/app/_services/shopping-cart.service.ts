@@ -30,7 +30,7 @@ export class ShoppingCartService {
         this.cart.items[product].quantity += change;
         this.cart.items[product].totalPrice =
           this.cart.items[product].quantity * this.cart.items[product].price;
-        console.log(this.cart.items[product]);
+        // console.log(this.cart.items[product]);
         if (this.cart.items[product].quantity == 0) {
           this.cart.items.splice(product, 1);
         }
@@ -44,10 +44,10 @@ export class ShoppingCartService {
   }
 
   // Called on clicking Add To Cart
-  addFromShoppingCart(product) {
+  addFromProduct(product) {
     this.cart.items.push(product);
-    console.log('cart');
-    console.log(this.cart);
+    // console.log('cart');
+    // console.log(this.cart);
     return this.http.patch(
       this.baseUrl + this.authService.decodedToken._id,
       this.cart

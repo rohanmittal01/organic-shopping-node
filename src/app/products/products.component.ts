@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ProductService } from '../_services/product.service';
 import { ActivatedRoute } from '@angular/router';
+import { ShoppingCartService } from '../_services/shopping-cart.service';
 
 @Component({
   selector: 'products',
@@ -17,12 +18,19 @@ export class ProductsComponent implements OnInit {
   cart: any;
   cartSubscription: Subscription;
 
-  constructor(private route: ActivatedRoute, private productService: ProductService) {
+  constructor(private route: ActivatedRoute, private productService: ProductService, private cartService: ShoppingCartService) {
     console.log('-------------------------------');
+    this.getCart();
     this.getProducts();
    }
 
   ngOnInit() {
+  }
+
+  getCart(){
+    this.cartService.getCart().subscribe((data: any) => {
+      this.cart = data;
+    })
   }
 
   getProducts(){

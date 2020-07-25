@@ -3,6 +3,7 @@ import { ShoppingCartService } from '../_services/shopping-cart.service';
 import { AlertifyService } from '../_services/alertify.service';
 
 @Component({
+  // tslint:disable-next-line: component-selector
   selector: 'shopping-cart-summary',
   templateUrl: './shopping-cart-summary.component.html',
   styleUrls: ['./shopping-cart-summary.component.css']
@@ -14,8 +15,8 @@ export class ShoppingCartSummaryComponent implements OnInit {
   totalPrice = 0;
   taxes = 0;
   deliveryCharges = 0;
-  constructor(private cartService: ShoppingCartService, private alertify: AlertifyService) { 
-    this.dataRetrieval()
+  constructor(private cartService: ShoppingCartService, private alertify: AlertifyService) {
+    this.dataRetrieval();
   }
 
   ngOnInit(): void {
@@ -46,9 +47,9 @@ export class ShoppingCartSummaryComponent implements OnInit {
       this.totalPrice += (this.cartData.items[productId].price * this.cartData.items[productId].quantity);
     }
 
-    this.totalPrice = this.totalPrice*1.05;
-      this.taxes = this.totalPrice * 0.05;
-    if(this.totalPrice < 300){
+    this.totalPrice = this.totalPrice * 1.05;
+    this.taxes = this.totalPrice * 0.05;
+    if (this.totalPrice < 300){
         this.deliveryCharges = 20;
         this.totalPrice += this.deliveryCharges;
       }
