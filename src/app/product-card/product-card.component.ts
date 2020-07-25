@@ -5,13 +5,17 @@ import { AlertifyService } from '../_services/alertify.service';
 import { AuthService } from '../_services/auth.service';
 
 @Component({
+  // tslint:disable-next-line: component-selector
   selector: 'product-card',
   templateUrl: './product-card.component.html',
   styleUrls: ['./product-card.component.css'],
 })
 export class ProductCardComponent implements OnInit {
+  // tslint:disable-next-line: no-input-rename
   @Input('product') product: any;
+  // tslint:disable-next-line: no-input-rename
   @Input('show-actions') showActions = true;
+  // tslint:disable-next-line: no-input-rename
   @Input('shopping-cart') shoppingCart;
 
   quantity = 0;
@@ -21,7 +25,6 @@ export class ProductCardComponent implements OnInit {
     private alertify: AlertifyService,
     private authService: AuthService
   ) {
-    
   }
 
   ngOnInit(): void {}
@@ -33,13 +36,14 @@ export class ProductCardComponent implements OnInit {
     }
     // tslint:disable-next-line: prefer-const
     let x: any = this.shoppingCart;
-    let quantity = 0;
+    // let quantity = 0;
     // if (this.shoppingCart.items[]){
     // quantity = (this.shoppingCart[this.product.$key]).quantity;
     // }
-    for( let cart in this.shoppingCart.items){
+    for ( const cart in this.shoppingCart.items){
       // console.log(cart);
-      if(this.shoppingCart.items[cart]._id == this.product._id){
+      // tslint:disable-next-line: triple-equals
+      if (this.shoppingCart.items[cart]._id == this.product._id){
          this.quantity = this.shoppingCart.items[cart].quantity;
          return this.quantity;
       }
@@ -52,6 +56,7 @@ export class ProductCardComponent implements OnInit {
     // console.log(this.product);
     // tslint:disable-next-line: triple-equals
     // console.log(this.cartService.cart);
+    // tslint:disable-next-line: triple-equals
     if (this.cartService.cart != [] && this.cartService.cart != undefined) {
       // console.log('hee')
       let data;
@@ -60,7 +65,7 @@ export class ProductCardComponent implements OnInit {
         data.quantity = 1;
         data.totalPrice = data.price;
         this.cartService.addFromProduct(data).subscribe(
-          (x) => {
+          () => {
             this.getQuantity();
           },
           (error) => {
@@ -80,7 +85,9 @@ export class ProductCardComponent implements OnInit {
           items: [data]
         };
         this.cartService.createShoppingCart(data).subscribe(
-          (x) => {},
+          () => {
+            this.getQuantity();
+          },
           (error) => {
             this.alertify.error('Could not add product to cart!');
           }
@@ -95,7 +102,10 @@ export class ProductCardComponent implements OnInit {
     this.cartService.addToCart(this.product);
   }
 
+
+
   removeFromCart() {
     this.quantity = this.quantity - 1;
+    this.cartService.removeFromCart(this.product);
   }
 }
