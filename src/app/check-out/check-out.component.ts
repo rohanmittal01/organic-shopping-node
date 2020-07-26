@@ -3,6 +3,7 @@ import { ShoppingCartService } from '../_services/shopping-cart.service';
 import { AuthService } from '../_services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { AlertifyService } from '../_services/alertify.service';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -22,7 +23,8 @@ export class CheckOutComponent implements OnInit {
   constructor(
     private cartService: ShoppingCartService,
     private authService: AuthService,
-    private http: HttpClient
+    private http: HttpClient,
+    private alertify: AlertifyService
   ) {
     this.dataRetrieval();
   }
@@ -74,6 +76,7 @@ export class CheckOutComponent implements OnInit {
         addressLine2: data.addressLine2,
         city: data.city,
         state: data.state,
+        country: data.country,
         name: data.name,
       },
       items: itemsData,
@@ -86,10 +89,27 @@ export class CheckOutComponent implements OnInit {
       deliveryPerson: 'NA'
     };
     console.log(order);
-    this.http.post(environment.apiUrl + 'sendmail', order);
+
   }
 
   sendMail(){
-    
+    let data = this.shipping;
+    const order = {
+      email: this.authService.decodedToken.email,
+      datePlaced: new Date(Date()),
+      phoneNumber: data.phoneNumber,
+      addressLine1: data.addressLine1,
+      addressLine2: data.addressLine2,
+      city: data.city,
+      state: data.state,
+      country: data.country,
+      name: data.name,
+      totalAmount: this.totalPrice
+    };
+    this.http.post(environment.apiUrl + 'send-invoice', order).subscribe(x => {
+
+    }, error => {
+      this.alertify.error('Email Sent');
+    });
   }
 }

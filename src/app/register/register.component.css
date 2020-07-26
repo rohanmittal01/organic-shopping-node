@@ -39,3 +39,10 @@ form{
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
 }
+input{
+    margin-top: 3px;
+}
+
+button{
+    margin-top: 6px
+}

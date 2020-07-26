@@ -96,7 +96,7 @@ import { CheckOutService } from './_guards/check-out.service';
       {path: 'login', component: LoginComponent},
       {path: 'register', component: RegisterComponent},
 
-      {path: 'check-out', component: CheckOutComponent, canActivate: [AuthGuardService, CheckOutService]},
+      {path: 'check-out', component: CheckOutComponent},
       {path: 'order-success/:id', component: OrderSuccessComponent, canActivate: [AuthGuardService]},
       {path: 'my/orders', component: MyOrdersComponent, canActivate: [AuthGuardService]},
 
