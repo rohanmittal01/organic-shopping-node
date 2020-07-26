@@ -12,7 +12,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatFormFieldModule} from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-import  { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppComponent } from './app.component';
@@ -44,6 +44,11 @@ import { ActiveDialogComponent } from './_dialogs/active-dialog/active-dialog.co
 import { BannerComponent } from './banner/banner.component';
 import { ShoppingCartSummaryComponent } from './shopping-cart-summary/shopping-cart-summary.component';
 import { CheckOutService } from './_guards/check-out.service';
+import { PaymentGatewayComponent } from './payment-gateway/payment-gateway.component';
+import { CategoryService } from './_services/category.service';
+import { DeliveryPersonService } from './_services/delivery-person.service';
+import { PasswordService } from './_services/password.service';
+import { ShoppingCartService } from './_services/shopping-cart.service';
 
 
 @NgModule({
@@ -69,7 +74,8 @@ import { CheckOutService } from './_guards/check-out.service';
     DeliveryPersonFormComponent,
     ActiveDialogComponent,
     BannerComponent,
-    ShoppingCartSummaryComponent
+    ShoppingCartSummaryComponent,
+    PaymentGatewayComponent
   ],
   imports: [
     BrowserModule,
@@ -97,6 +103,7 @@ import { CheckOutService } from './_guards/check-out.service';
       {path: 'register', component: RegisterComponent},
 
       {path: 'check-out', component: CheckOutComponent},
+      {path: 'payment-gateway', component: PaymentGatewayComponent, canActivate: [AuthGuardService]},
       {path: 'order-success/:id', component: OrderSuccessComponent, canActivate: [AuthGuardService]},
       {path: 'my/orders', component: MyOrdersComponent, canActivate: [AuthGuardService]},
 
@@ -120,7 +127,11 @@ import { CheckOutService } from './_guards/check-out.service';
     AuthGuardService,
     LoggedinGuardService,
     ProductService,
-    CheckOutService
+    CheckOutService,
+    CategoryService,
+    DeliveryPersonService,
+    PasswordService,
+    ShoppingCartService
   ],
   bootstrap: [AppComponent]
 })

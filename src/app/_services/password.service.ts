@@ -14,4 +14,8 @@ export class PasswordService {
   registerOtp(credentials){
     return this.http.post(this.baseUrl + 'register', credentials);
   }
+
+  orderOtp(credentials){
+    return this.http.post(this.baseUrl + 'verify-order', credentials);
+  }
 }

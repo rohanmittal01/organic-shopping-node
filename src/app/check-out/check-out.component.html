@@ -119,10 +119,10 @@
         <input #otp ngModel type="text" name="otp" id="otp" [(ngModel)]="otpValue" class="form-control" placeholder="Enter OTP" required>
         <div class="row mt-2">
           <div class="col-6">
-            <button [disabled]="!otpForm.valid" class="btn btn-primary btn-block" type="submit">Verify and Register</button>
+            <button [disabled]="!otpForm.valid" class="btn btn-primary btn-block" type="submit">Verify</button>
           </div>
           <div class="col-6">
-            <button class="btn btn-primary btn-block" type="button" (click)="addButtonPressed()">Resend OTP</button>
+            <button class="btn btn-block" type="button" style="background-color: lightcoral;" (click)="addButtonPressed()">Resend OTP</button>
           </div>
         
       </div>

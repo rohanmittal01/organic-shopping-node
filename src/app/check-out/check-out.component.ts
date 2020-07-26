@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { AlertifyService } from '../_services/alertify.service';
 import { PasswordService } from '../_services/password.service';
+import { Router } from '@angular/router';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -31,7 +32,8 @@ export class CheckOutComponent implements OnInit {
     private authService: AuthService,
     private http: HttpClient,
     private alertify: AlertifyService,
-    private passwordService: PasswordService
+    private passwordService: PasswordService,
+    private route: Router
   ) {
     this.dataRetrieval();
   }
@@ -91,7 +93,7 @@ export class CheckOutComponent implements OnInit {
   }
 
   sendOtp(model){
-      this.passwordService.registerOtp(this.otpModel).subscribe(x => {
+      this.passwordService.orderOtp(this.otpModel).subscribe(x => {
         this.passwordSent = true;
         console.log(x);
       }, error => {
@@ -142,12 +144,13 @@ export class CheckOutComponent implements OnInit {
       status: 'Order Placed',
       deliveryPerson: 'NA'
     };
+    this.route.navigate(['/payment-gateway']);
     console.log(order);
 
   }
 
   sendMail(){
-    let data = this.shipping;
+    const data = this.shipping;
     const order = {
       email: this.authService.decodedToken.email,
       datePlaced: new Date(Date()),
