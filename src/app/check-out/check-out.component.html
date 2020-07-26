@@ -1,7 +1,7 @@
 <h2>Shipping</h2>
 <div class="row">
   <div class="col-md-6 mt-2">
-    <form #f="ngForm" (ngSubmit)="checkOutPressed(f.value)">
+    <form *ngIf="!passwordSent" #f="ngForm" (ngSubmit)="addButtonPressed()">
       <div class="form-group">
         <label for="">Name</label>
         <input
@@ -27,8 +27,8 @@
           class="form-control"
           required
         />
-        <div class="alert alert-danger" *ngIf="name.touched && name.invalid">
-          <div *ngIf="name.errors.required">Address Line 1 is required.</div>
+        <div class="alert alert-danger" *ngIf="addressLine1.touched && addressLine1.invalid">
+          <div *ngIf="addressLine1.errors.required">Address Line 1 is required.</div>
         </div>
       </div>
       <div class="form-group">
@@ -112,9 +112,23 @@
       </button>
       <p *ngIf="totalPrice==0">Your shopping cart is empty!</p>
     </form>
-    <hr>
-    <button type="button" class="btn" (click)="sendMail()">Mail</button>
-  </div>
+
+    <div *ngIf="passwordSent">
+      <div class="alert alert-success" ><strong>Alert:</strong> An OTP has been sent to <b>{{otpModel.email}}</b>. Please enter below to verify order</div>
+      <form #otpForm="ngForm" class="form-signin text-center" style="padding: 2px" (submit)="otpSubmitPressed()">
+        <input #otp ngModel type="text" name="otp" id="otp" [(ngModel)]="otpValue" class="form-control" placeholder="Enter OTP" required>
+        <div class="row mt-2">
+          <div class="col-6">
+            <button [disabled]="!otpForm.valid" class="btn btn-primary btn-block" type="submit">Verify and Register</button>
+          </div>
+          <div class="col-6">
+            <button class="btn btn-primary btn-block" type="button" (click)="addButtonPressed()">Resend OTP</button>
+          </div>
+        
+      </div>
+      </form>
+    </div>
+  </div>  
   <div class="col-sm-6 mt-2">
       <shopping-cart-summary></shopping-cart-summary>
   </div>

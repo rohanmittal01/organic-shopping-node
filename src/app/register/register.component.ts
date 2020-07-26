@@ -50,6 +50,7 @@ addButtonPressed(){
   console.log(this.model);
   this.randomString();
   console.log(this.codeGenerated);
+
   this.sendOtp(this.model);
 }
 
@@ -78,6 +79,8 @@ otpSubmitPressed(){
   // tslint:disable-next-line: triple-equals
   if(this.codeGenerated == this.otpValue){
     this.register();
+  }else{
+    this.alertify.error("Incorrect OTP!")
   }
 }
 

@@ -4,6 +4,7 @@ import { AuthService } from '../_services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { AlertifyService } from '../_services/alertify.service';
+import { PasswordService } from '../_services/password.service';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -20,11 +21,17 @@ export class CheckOutComponent implements OnInit {
   cart: any[] = [];
   taxes = 0;
   deliveryCharges = 0;
+  passwordSent = false;
+  codeGenerated = '';
+  otpValue = '';
+  
+  otpModel;
   constructor(
     private cartService: ShoppingCartService,
     private authService: AuthService,
     private http: HttpClient,
-    private alertify: AlertifyService
+    private alertify: AlertifyService,
+    private passwordService: PasswordService
   ) {
     this.dataRetrieval();
   }
@@ -56,8 +63,55 @@ export class CheckOutComponent implements OnInit {
     // console.log(this.totalPrice);
   }
 
-  checkOutPressed(data) {
-    console.log(data);
+  randomString() {
+    const chars =
+      '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz';
+    const stringLength = 10;
+    let randomstring = '';
+    for (let i = 0; i < stringLength; i++) {
+      const rnum = Math.floor(Math.random() * chars.length);
+      randomstring += chars.substring(rnum, rnum + 1);
+    }
+    this.codeGenerated = randomstring;
+    return 0;
+  }
+
+  addButtonPressed(){
+    this.passwordSent = false;
+    console.log(this.shipping);
+    this.randomString();
+    console.log(this.codeGenerated);
+    this.otpModel = {
+      email: this.authService.decodedToken.email,
+      name: this.shipping.name,
+      code: this.codeGenerated
+
+    }
+    this.sendOtp(this.otpModel);
+  }
+
+  sendOtp(model){
+      this.passwordService.registerOtp(this.otpModel).subscribe(x => {
+        this.passwordSent = true;
+        console.log(x);
+      }, error => {
+        console.log(error);
+        this.alertify.success('OTP Sent');
+        this.passwordSent = true;
+      });
+  }
+
+  otpSubmitPressed(){
+    // tslint:disable-next-line: triple-equals
+    if (this.codeGenerated == this.otpValue){
+      this.checkOutPressed();
+    }else{
+      this.alertify.error('Incorrect OTP!')
+    }
+  }
+
+  checkOutPressed() {
+    const data = this.shipping;
     const itemsData = [];
     // tslint:disable-next-line: forin
     for (const id in this.cartData.items) {
