@@ -35,6 +35,7 @@ export class ProductCardComponent implements OnInit {
 
   getQuantity() {
     this.shoppingCart = this.cartService.cart;
+    console.log(this.shoppingCart);
     // console.log(this.shoppingCart)
     if (!this.shoppingCart){
       return 0;
@@ -92,6 +93,9 @@ export class ProductCardComponent implements OnInit {
         this.cartService.createShoppingCart(data).subscribe(
           () => {
             this.getQuantity();
+            
+            this.alertify.success('Shopping Cart created');
+            window.location.reload();
           },
           (error) => {
             this.alertify.error('Could not add product to cart!');

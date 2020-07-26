@@ -86,6 +86,7 @@ export class ShoppingCartComponent implements OnInit {
     this.cartService.clearCart().subscribe(x => {
       this.shoppingCartItemCount = 0;
       this.alertify.success('Cart cleared successfully!');
+      window.location.reload();
     }, error => {
       this.alertify.error('Cart could not be cleared!');
     });

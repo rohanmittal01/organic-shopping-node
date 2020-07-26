@@ -43,6 +43,7 @@ import { DeliveryPersonFormComponent } from './delivery-person-form/delivery-per
 import { ActiveDialogComponent } from './_dialogs/active-dialog/active-dialog.component';
 import { BannerComponent } from './banner/banner.component';
 import { ShoppingCartSummaryComponent } from './shopping-cart-summary/shopping-cart-summary.component';
+import { CheckOutService } from './_guards/check-out.service';
 
 
 @NgModule({
@@ -95,7 +96,7 @@ import { ShoppingCartSummaryComponent } from './shopping-cart-summary/shopping-c
       {path: 'login', component: LoginComponent},
       {path: 'register', component: RegisterComponent},
 
-      {path: 'check-out', component: CheckOutComponent, canActivate: [AuthGuardService]},
+      {path: 'check-out', component: CheckOutComponent, canActivate: [AuthGuardService, CheckOutService]},
       {path: 'order-success/:id', component: OrderSuccessComponent, canActivate: [AuthGuardService]},
       {path: 'my/orders', component: MyOrdersComponent, canActivate: [AuthGuardService]},
 
@@ -118,7 +119,8 @@ import { ShoppingCartSummaryComponent } from './shopping-cart-summary/shopping-c
     AlertifyService,
     AuthGuardService,
     LoggedinGuardService,
-    ProductService
+    ProductService,
+    CheckOutService
   ],
   bootstrap: [AppComponent]
 })
