@@ -14,7 +14,7 @@ import { PasswordService } from '../_services/password.service';
 export class RegisterComponent implements OnInit {
 
   model: any = {};
-  emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
+  emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$';
   passwordSent = false;
   codeGenerated = '';
   otpValue = '';
@@ -27,6 +27,7 @@ export class RegisterComponent implements OnInit {
   }
 
 
+  // tslint:disable-next-line: max-line-length
   constructor(private authService: AuthService, private alertify: AlertifyService, private route: Router, private passwordService: PasswordService) { }
 
   ngOnInit(): void {
@@ -55,6 +56,7 @@ addButtonPressed(){
 }
 
 sendOtp(model){
+  // tslint:disable-next-line: triple-equals
   if (model.password == model.confirmPassword){
     const otpModel = {
       email: this.model.email,
@@ -77,10 +79,10 @@ sendOtp(model){
 
 otpSubmitPressed(){
   // tslint:disable-next-line: triple-equals
-  if(this.codeGenerated == this.otpValue){
+  if (this.codeGenerated == this.otpValue){
     this.register();
   }else{
-    this.alertify.error("Incorrect OTP!")
+    this.alertify.error('Incorrect OTP!');
   }
 }
 
@@ -98,10 +100,11 @@ otpSubmitPressed(){
       // const token = localStorage.getItem('token');
       // console.log(token)
       this.route.navigate(['/login']);
-      
+
     }, error => {
       console.log(error);
-      if(error.error.name == "MongoError"){
+      // tslint:disable-next-line: triple-equals
+      if (error.error.name == 'MongoError'){
         this.alertify.error('Account already exists');
         this.route.navigate(['/login']);
       }

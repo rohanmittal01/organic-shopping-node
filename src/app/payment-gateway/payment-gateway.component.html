@@ -1,1 +1,68 @@
-<p>payment-gateway works!</p>
+<div>
+  <div class="text-center">
+    <h1>Complete your Order</h1>
+  </div>
+  <hr />
+  <div class="row mt-5 mb-5">
+    <div class="col-2"></div>
+    <div class="col-5">
+      Your order will be charged in INR
+    </div>
+    <div class="col-3">Order Total: &#8377; {{ orderData.totalAmount }}</div>
+    <div class="col-2"></div>
+  </div>
+  <hr />
+  <div>
+    <div class="row">
+      <div class="col-3"></div>
+      <div class="col-6">
+        <h3>Payment Information</h3>
+        Enter your credit card details below. We accept Visa, Mastercard,
+        discover, and American Express.
+      </div>
+      <div class="col-3"></div>
+    </div>
+
+    <br />
+    <form>
+      <div class="row mt-3" style="font-weight: light;">
+        <div class="col-4" style="text-align: right;">Number:</div>
+        <div class="col-6" style="text-align: right;">
+          <input
+            #number
+            name="number"
+            [(ngModel)]="card.number"
+            type="text"
+            class="form-control"
+            required
+          />
+          <div
+            class="alert alert-danger"
+            *ngIf="number.touched && number.invalid"
+          >
+            <div *ngIf="number.errors.required">Card Number is required.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col-4" style="text-align: right;">Cardholder's Name:</div>
+        <div class="col-6" style="text-align: right;">
+          <input
+            #name
+            name="name"
+            [(ngModel)]="card.name"
+            type="text"
+            class="form-control"
+            required
+          />
+          <div class="alert alert-danger" *ngIf="name.touched && name.invalid">
+            <div *ngIf="name.errors.required">
+              Cardholder's Name is required.
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

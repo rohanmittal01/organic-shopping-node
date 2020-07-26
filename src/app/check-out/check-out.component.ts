@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { AlertifyService } from '../_services/alertify.service';
 import { PasswordService } from '../_services/password.service';
 import { Router } from '@angular/router';
+import { OrderService } from '../_services/order.service';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -25,7 +26,7 @@ export class CheckOutComponent implements OnInit {
   passwordSent = false;
   codeGenerated = '';
   otpValue = '';
-  
+
   otpModel;
   constructor(
     private cartService: ShoppingCartService,
@@ -33,7 +34,8 @@ export class CheckOutComponent implements OnInit {
     private http: HttpClient,
     private alertify: AlertifyService,
     private passwordService: PasswordService,
-    private route: Router
+    private route: Router,
+    private orderService: OrderService
   ) {
     this.dataRetrieval();
   }
@@ -87,8 +89,7 @@ export class CheckOutComponent implements OnInit {
       email: this.authService.decodedToken.email,
       name: this.shipping.name,
       code: this.codeGenerated
-
-    }
+    };
     this.sendOtp(this.otpModel);
   }
 
@@ -108,7 +109,7 @@ export class CheckOutComponent implements OnInit {
     if (this.codeGenerated == this.otpValue){
       this.checkOutPressed();
     }else{
-      this.alertify.error('Incorrect OTP!')
+      this.alertify.error('Incorrect OTP!');
     }
   }
 
@@ -140,10 +141,11 @@ export class CheckOutComponent implements OnInit {
         deliveryCharges: this.deliveryCharges,
         taxes: this.taxes
       },
-      totalAmount: this.totalPrice,
+      totalAmount: this.totalPrice.toFixed(2),
       status: 'Order Placed',
       deliveryPerson: 'NA'
     };
+    this.orderService.orderData = order;
     this.route.navigate(['/payment-gateway']);
     console.log(order);
 

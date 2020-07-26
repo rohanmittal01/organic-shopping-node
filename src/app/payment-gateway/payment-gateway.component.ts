@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { OrderService } from '../_services/order.service';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -8,7 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PaymentGatewayComponent implements OnInit {
 
-  constructor() { }
+  orderData;
+  card;
+  constructor(private orderService: OrderService) {
+    console.log('datatatata');
+    console.log(orderService.orderData);
+    this.orderData = orderService.orderData;
+   }
 
   ngOnInit(): void {
   }
