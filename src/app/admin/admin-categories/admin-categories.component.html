@@ -48,7 +48,11 @@
               ><mat-icon>create</mat-icon></a
             >
           </button>
-   
+          <button mat-icon-button type="button" >
+            <a [routerLink]="['/admin/categories/']" (click)='delete(element._id)' style="color: red;"
+              ><mat-icon>delete</mat-icon></a
+            >
+          </button>
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="loading">
