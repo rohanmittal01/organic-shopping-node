@@ -24,7 +24,7 @@
     </div>
 
     <br />
-    <form>
+    <form #f="ngForm" (submit)="save()">
       <div class="row mt-3" style="font-weight: light;">
         <div class="col-4" style="text-align: right;">Number:</div>
         <div class="col-6" style="text-align: right;">
@@ -75,10 +75,10 @@
             id="month"
             type="text"
             class="form-control"
-            style="width: 80px"
+            style="width: 120px"
           >
             <option value="">mm</option>
-            <option *ngFor="let c of month">{{ c }}</option>
+            <option *ngFor="let c of monthArray" [value]="monthArray[c-1]">{{ monthArray[c-1] }}</option>
           </select>
           <select
           required
@@ -86,20 +86,27 @@
           #year="ngModel"
           name="year"
           id="year"
-          type="text"
+        
           class="form-control"
-          style="width: 80px"
+          style="width: 120px"
         >
           <option value="">yyyy</option>
-          <option *ngFor="let c of month">{{ month[c] }}</option>
+          <option *ngFor="let c of yearArray" [value]="yearArray[c-1]">{{ yearArray[c-1] }}</option>
         </select>
-          <div class="alert alert-danger" style="" *ngIf="month.touched && month.invalid">
+          <div class="alert alert-danger" style="text-align: left;" *ngIf="month.touched && month.invalid">
             <div *ngIf="month.errors.required">
               Month is required.
             </div>
           </div>
         </div>
       </div>
+      <div class="row mt-3" style="font-weight: light;">
+        <div class="col-4" style="text-align: right;"></div>
+        <div class="col-6" style="text-align: right;">
+          <button class="btn btn-danger" routerLink="/shopping-cart">Cancel</button>
+          <button class="btn btn-primary" [disabled]="!f.valid">Place Order</button>
+        </div>
+        </div>
       
     </form>
   </div>
