@@ -18,7 +18,6 @@ export class AdminCategoriesComponent{
   categories: any = [];
   filteredCategories: any[];
   subscribe: Subscription;
-  
   listData: MatTableDataSource<any>;
   displayedColumns: string[] = ['sno', 'key', 'name', '$key'];
   @ViewChild(MatSort) sort: MatSort;

@@ -4,6 +4,8 @@ import { CategoryService } from '../_services/category.service';
 import { ProductService } from '../_services/product.service';
 import { AlertifyService } from '../_services/alertify.service';
 import { AuthService } from '../_services/auth.service';
+import { ActiveDialogComponent } from '../_dialogs/active-dialog/active-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-product-form',
@@ -15,7 +17,7 @@ export class ProductFormComponent implements OnInit {
   categories$: any;
   product: any = {};
   id;
-  constructor(private route: ActivatedRoute, private router: Router,
+  constructor(private route: ActivatedRoute, private router: Router, private dialog: MatDialog,
               private categoryService: CategoryService, private productService: ProductService, private alertify: AlertifyService, private authService: AuthService) {
       
       categoryService.getAll().subscribe(categories => {
@@ -75,4 +77,23 @@ export class ProductFormComponent implements OnInit {
       this.alertify.error('Product could not be deleted!')
     });
   }
+
+  openDialog(): void {
+    if (this.id) {
+      let dialogRef = this.dialog.open(ActiveDialogComponent);
+      dialogRef.afterClosed().subscribe((result) => {
+        console.log('Dialog Result: ' + result);
+        if (result == 'Yes') {
+          this.alertify.success('Deliveryman activation status Confirmed.');
+        } else if (result == 'No') {
+          // this.search();
+          this.product.isAvailable = !this.product.isAvailable;
+          this.alertify.warning(
+            'Deliveryman activation status change declined.'
+          );
+        }
+      });
+    }
+  }
+  
 }

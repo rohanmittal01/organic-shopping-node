@@ -40,6 +40,20 @@
         <mat-header-cell *matHeaderCellDef mat-sort-header>Price</mat-header-cell>
         <mat-cell *matCellDef="let element">{{ element.price }}</mat-cell>
       </ng-container>
+      <ng-container matColumnDef="isAvailable">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+          >Available?</mat-header-cell
+        >
+        <mat-cell *matCellDef="let element">
+          <mat-checkbox
+            class="example-margin"
+            
+            [ngModel]="element.isAvailable"
+            [checked]="element.isAvailable"
+            (ngModelChange)="openDialog(element._id, $event)"
+          ></mat-checkbox>
+        </mat-cell>
+      </ng-container>
       <ng-container matColumnDef="$key">
         <mat-header-cell *matHeaderCellDef>Edit</mat-header-cell>
         <mat-cell *matCellDef="let element">
