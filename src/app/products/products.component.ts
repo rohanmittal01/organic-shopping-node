@@ -19,6 +19,8 @@ export class ProductsComponent implements OnInit {
   cart: any;
   cartSubscription: Subscription;
 
+  noProducts = false;
+
   constructor(private route: ActivatedRoute, private productService: ProductService, private cartService: ShoppingCartService) {
     console.log('-------------------------------');
     this.getCart();
@@ -49,6 +51,15 @@ export class ProductsComponent implements OnInit {
         // tslint:disable-next-line: triple-equals
         this.productListCollection.filter((p: { category: string; }) => p.category.toLowerCase() == this.category.toLowerCase()) :
         this.productListCollection;
+      // tslint:disable-next-line: triple-equals
+      console.log(this.filteredProducts);
+      // tslint:disable-next-line: triple-equals
+      if (this.filteredProducts.length == 0){
+        console.log('empty af');
+        // tslint:disable-next-line: no-unused-expression
+        // tslint:disable-next-line: triple-equals
+        this.noProducts == true;
+      }
       // console.log(this.category);
      //  console.log(this.filteredProducts);
     });

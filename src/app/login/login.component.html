@@ -6,7 +6,7 @@
     <label for="inputEmail" class="sr-only">Email address</label>
     <input #Email ngModel type="email" name="email" id="inputEmail" [(ngModel)]="model.email" class="form-control" placeholder="Email address" [pattern]="emailPattern" required>
     <label for="inputPassword" class="sr-only">Password</label>
-    <input #Password ngModel type="password" name="password" id="inputPassword" [(ngModel)]="model.password" class="form-control" placeholder="Password" required>
+    <input #Password ngModel type="password" name="password" id="inputPassword" [(ngModel)]="model.password" class="form-control" placeholder="Password" required minlength="7">
     <button [disabled]="!loginForm.valid" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
 
   </form>

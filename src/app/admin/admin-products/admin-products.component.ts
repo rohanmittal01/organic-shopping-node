@@ -30,7 +30,7 @@ export class AdminProductsComponent implements OnInit {
 
   constructor(private productService: ProductService, private alertify: AlertifyService, private dialog: MatDialog) {
 
-    this.productService.getAll().subscribe(products => {
+    this.productService.getAllProducts().subscribe(products => {
       console.log(products);
       this.array = products;
       this.listData = new MatTableDataSource(this.array);
@@ -75,7 +75,7 @@ export class AdminProductsComponent implements OnInit {
     console.log(modData[0]);
     this.productService.update(id, modData[0]).subscribe(
       () => {
-        this.alertify.success('Modified Successfully');
+        this.alertify.success('Product Availability Modified Successfully');
         // this.router.navigate(['/admin']);
       },
       (error) => {

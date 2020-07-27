@@ -19,6 +19,10 @@ export class ProductService {
     return this.http.get(this.baseUrl + 'products');
   }
 
+  getAllProducts(){
+    return this.http.get(this.baseUrl + 'products/all');
+  }
+
   get(id){
     return this.http.get(this.baseUrl + 'products/' + id);
   }
