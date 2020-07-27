@@ -1,5 +1,5 @@
 <div>
-    <button mat-raised-button><a routerLink="/admin/products/new"><mat-icon>add</mat-icon> Add</a></button>
+    <button mat-raised-button style="color: blue" routerLink="/admin/products/new">Add</button>
       <mat-form-field class="search-form-field">
         <mat-label>Search</mat-label>
         <input
@@ -43,9 +43,14 @@
       <ng-container matColumnDef="$key">
         <mat-header-cell *matHeaderCellDef>Edit</mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <button mat-icon-button type="button">
-            <a [routerLink]="['/admin/products/', element._id]"
+          <button mat-icon-button type="button" >
+            <a [routerLink]="['/admin/products/', element._id]" style="color: green"
               ><mat-icon>create</mat-icon></a
+            >
+          </button>
+          <button mat-icon-button type="button" >
+            <a [routerLink]="['/admin/products/']" (click)='delete(element._id)' style="color: red;"
+              ><mat-icon>delete</mat-icon></a
             >
           </button>
         </mat-cell>

@@ -5,6 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { ProductService } from 'src/app/_services/product.service';
 import { CategoryService } from 'src/app/_services/category.service';
+import { AlertifyService } from 'src/app/_services/alertify.service';
 
 @Component({
   selector: 'app-admin-categories',
@@ -25,7 +26,7 @@ export class AdminCategoriesComponent{
   searchKey: string;
   array: any;
 
-  constructor(private categoryService: CategoryService) {
+  constructor(private categoryService: CategoryService, private alertify: AlertifyService) {
 
     this.categoryService.getAll().subscribe(products => {
       console.log(products);
@@ -33,7 +34,7 @@ export class AdminCategoriesComponent{
       this.listData = new MatTableDataSource(this.array);
       this.listData.sort = this.sort;
       this.listData.paginator = this.paginator;
-  })
+    });
    }
 
 
@@ -44,5 +45,7 @@ export class AdminCategoriesComponent{
     this.searchKey = '';
     this.applyFilter();
   }
+
+
 
 }
