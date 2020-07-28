@@ -1,4 +1,5 @@
 <div class="sticky-top">
+    <a routerLink="/" class="list-group-item list-group-item-action" [queryParams]='{availability: "available"}' [class.active]="availability == 'available'">Available Only</a>
     <div class="list-group">
         <a routerLink="/" class="list-group-item list-group-item-action" [class.active]="!category">All Categories</a>
         <a *ngFor = "let c of categories" routerLink="/" [queryParams]='{category: c.key}'  

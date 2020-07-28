@@ -24,9 +24,9 @@ export class AppComponent {
         if(x){
         this.cartService.cart = x;
         }else{
-          this.cartService.cart = []
+          this.cartService.cart = [];
         }
-        console.log(this.cartService.cart);
+        // console.log(this.cartService.cart);
       });
       
       // this.authService.logged = true;

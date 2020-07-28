@@ -12,7 +12,8 @@ export class ProductFilterComponent implements OnInit{
   categories: any[];
   subscribe2: Subscription;
   @Input('category') category: any;
-  constructor(private categoryService: CategoryService) { 
+  @Input('avialability') availability: any;
+  constructor(private categoryService: CategoryService) {
 
     categoryService.getAll().subscribe((x: any) => {
       this.categories = x;

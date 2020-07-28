@@ -35,7 +35,7 @@ export class ProductCardComponent implements OnInit {
 
   getQuantity() {
     this.shoppingCart = this.cartService.cart;
-    console.log(this.shoppingCart);
+    // console.log(this.shoppingCart);
     // console.log(this.shoppingCart)
     if (!this.shoppingCart){
       return 0;

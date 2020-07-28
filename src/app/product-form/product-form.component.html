@@ -53,12 +53,14 @@
                               #isAvailable="ngModel"
                               (ngModelChange)="openDialog()"
                               
-                              ><span>Is Active</span></mat-checkbox>
+                              ><span>Is Available</span></mat-checkbox>
                               </div>
                         </div>
                     </div>
-                    <button class="btn btn-primary" [disabled]="!f.valid">Save</button>
-                    <button class="btn btn-danger ml-2" type="button" (click)="delete()">Delete</button>
+                    <div class="btn-group d-flex">
+                    <button class="btn btn-primary w-100" [disabled]="!f.valid">Save</button>
+                    <button *ngIf="id" class="btn btn-danger w-100" type="button" (click)="delete()">Delete</button>
+                </div>
                 </form>
             </div>
         </div>

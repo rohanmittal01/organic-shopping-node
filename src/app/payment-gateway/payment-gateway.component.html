@@ -67,6 +67,7 @@
       <div class="row mt-3">
         <div class="col-4" style="text-align: right;">Expiration Date:</div>
         <div class="col-6" style="text-align: right;">
+          <div class="d-flex">
           <select
             required
             [(ngModel)]="card.month"
@@ -81,20 +82,21 @@
             <option *ngFor="let c of monthArray" [value]="monthArray[c-1]">{{ monthArray[c-1] }}</option>
           </select>
           <select
-          required
-          [(ngModel)]="card.year"
-          #year="ngModel"
-          name="year"
-          id="year"
-        
-          class="form-control"
-          style="width: 120px"
-        >
-          <option value="">yyyy</option>
-          <option *ngFor="let c of yearArray" [value]="yearArray[c-1]">{{ yearArray[c-1] }}</option>
-        </select>
-          <div class="alert alert-danger" style="text-align: left;" *ngIf="month.touched && month.invalid">
-            <div *ngIf="month.errors.required">
+            required
+            [(ngModel)]="card.year"
+            #year="ngModel"
+            name="year"
+            id="year"
+            type="text"
+            class="form-control"
+            style="width: 120px"
+          >
+            <option value="">yyyy</option>
+            <option *ngFor="let c of yearArray" [value]="yearArray[c-1]">{{ yearArray[c-1] }}</option>
+          </select>
+        </div>
+          <div class="alert alert-danger" style="text-align: left;" *ngIf="(month.touched && month.invalid) || (year.touched && year.invalid)">
+            <div *ngIf="month.errors.required || year.errors.required">
               Month is required.
             </div>
           </div>

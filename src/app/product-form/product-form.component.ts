@@ -70,12 +70,13 @@ export class ProductFormComponent implements OnInit {
   }
 
   delete(){
-    this.productService.delete(this.id).subscribe(x => {
-      this.alertify.success('Product deleted successfully!');
-      this.router.navigate(['/admin/products']);
-    }, error => {
-      this.alertify.error('Product could not be deleted!')
-    });
+    console.log(this.product);
+    // this.productService.delete(this.id).subscribe(x => {
+    //   this.alertify.success('Product deleted successfully!');
+    //   this.router.navigate(['/admin/products']);
+    // }, error => {
+    //   this.alertify.error('Product could not be deleted!')
+    // });
   }
 
   openDialog(): void {

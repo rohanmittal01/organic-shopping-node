@@ -16,7 +16,7 @@ export class ProductService {
   }
 
   getAll(){
-    return this.http.get(this.baseUrl + 'products');
+    return this.http.get(this.baseUrl + 'products/available');
   }
 
   getAllProducts(){
