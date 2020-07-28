@@ -1,3 +1,7 @@
 fieldset{
     display: block;
 }
+
+.hide{
+    opacity: 0.5;
+}
