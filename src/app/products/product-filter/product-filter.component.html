@@ -2,11 +2,11 @@
     <p>Choose Availability</p>
     <a routerLink="/" class="list-group-item list-group-item-action" [queryParams]='{availability: "available"}' [class.active]="availability == 'available'">Available Only</a>
     <div class=" mt-2">
-        <p>Choose Range</p>
+        <p>Choose Range (in &#8377;)</p>
         <div class="d-flex" [class.active]="range">
             <input [(ngModel)]="range.min" #min="ngModel" name="min" id="min" type="number" placeholder="Min" class="form-control" style="width: 100px; height: 40px" min="0">
             <input [(ngModel)]="range.max" #max="ngModel" name="max" id="max" type="number" placeholder="Max" class="form-control" style="width: 100px; height: 40px;" min="0">
-            <button class="btn btn-success" style="width: 60px; height: 40px" (click)="print()"><a routerLink="/" [queryParams]="{minim: range.min, maxim: range.max}" style="color: white">Go</a></button>
+            <button class="btn btn-success" style="width: 60px; height: 40px" (click)="print()" routerLink="/" [queryParams]="{minim: range.min, maxim: range.max}" style="color: white">Go</button>
         </div>
     </div>
     <div class="list-group mt-3">

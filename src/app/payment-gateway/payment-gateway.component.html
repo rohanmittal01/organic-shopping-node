@@ -68,7 +68,7 @@
       </div>
       <div class="row mt-3">
         <div class="col-4" style="text-align: right;">Expiration Date:</div>
-        <div class="col-6" style="text-align: right;">
+        <div class="col-6" style="text-align: left;">
           <div class="d-flex">
             <select
               required
@@ -111,8 +111,10 @@
             "
           >
             <div *ngIf="month.errors.required || year.errors.required">
-              *Please enter a valid Expiration Date.
+              Please enter a valid Expiration Date.
             </div>
+          </div>
+          <div *ngIf="dateError" style="color: red">Please enter a valid expiration date.
           </div>
         </div>
       </div>

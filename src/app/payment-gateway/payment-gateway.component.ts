@@ -43,6 +43,7 @@ export class PaymentGatewayComponent implements OnInit {
   ];
   cardDigit;
   cardError = false;
+  dateError = false;
   constructor(private orderService: OrderService) {
     console.log('datatatata');
     console.log(orderService.orderData);
@@ -53,8 +54,35 @@ export class PaymentGatewayComponent implements OnInit {
 
   save() {
     this.cardError = false;
+    this.dateError = false;
     let c = String(this.card.number);
-    console.log(c.length);
+    this.checkDate();
+
+  }
+
+  checkDate(){
+    let date = new Date();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+    if (year > this.card.year){
+      this.dateError = true;
+      console.log('here');
+    }else if (year == Number(this.card.year)){
+      if (month >= Number(this.card.month)){
+        this.dateError = true;
+      }else{
+        this.dateError = false;
+        this.checkCard();
+      }
+    }else{
+      this.dateError = false;
+      this.checkCard();
+    }
+    // if(this.card.year)
+  }
+
+  checkCard(){
+    let c = String(this.card.number);
     if (this.cardDigit == 3) {
       if (c.length == 15) {
         this.cardError = false;
@@ -87,7 +115,6 @@ export class PaymentGatewayComponent implements OnInit {
       this.cardError = true;
     }
   }
-
   secondCheck() {
     let c = this.card.number;
     const lastDigit = c % 10;
@@ -110,8 +137,8 @@ export class PaymentGatewayComponent implements OnInit {
     }
     console.log(cardSum);
     if (cardSum % 10 == lastDigit){
-      console.log('verified');
       this.cardError = false;
+      this.proceed();
     }else{
       this.cardError = true;
     }
