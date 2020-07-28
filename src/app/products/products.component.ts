@@ -19,7 +19,8 @@ export class ProductsComponent implements OnInit {
   cartSubscription: Subscription;
   availability;
   noProducts = false;
-
+  minRange: number;
+  maxRange: number;
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,

@@ -2,7 +2,6 @@
     <img class="card-img-top" [src]="product.imageUrl" *ngIf="product.imageUrl" alt="{{product.title}}" />
     <div class="card-body">
       <h5 class="card-title">{{ product.title }}</h5>
-
       <p class="card-text">{{ product.price | currency: "INR" }}</p>
       <p *ngIf="!product.isAvailable" class="card-text" style="color: red">Currently Unavailable</p>
     </div>

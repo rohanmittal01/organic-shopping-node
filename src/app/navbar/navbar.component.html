@@ -1,11 +1,11 @@
-<nav *ngIf="loggedIn" class="navbar navbar-expand-md navbar-light bg-light fixed-top">
-    <a class="navbar-brand" routerLink="/">OS</a>
+<nav *ngIf="loggedIn" class="navbar navbar-expand-md fixed-top" style="background-color: cadetblue; color: white">
+    <a class="navbar-brand" routerLink="/"><img src="https://www.toesox.com/wp/wp-content/uploads/2016/01/orgnic-produce.jpg" alt="OS" style="height: 40px"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
   
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-      <ul class="navbar-nav ml-auto">
+      <ul class="navbar-nav mr-auto">
         <li class="nav-item">
           <a class="nav-link" routerLink="/products">
             Products
@@ -13,8 +13,11 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/shopping-cart">
-            Shopping Cart
+            <span class="material-icons">
+              shopping_cart
+            </span>
             <span class="badge badge-warning bage-pill">{{shoppingCartItemCount}}</span>
+            
           </a>
         </li>
         <ng-template #anonymousUser>
@@ -26,14 +29,14 @@
           <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {{authService.decodedToken.name}}
           </a>
-          <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdown01">
+          <div ngbDropdownMenu class="dropdown-menu mr-auto" aria-labelledby="dropdown01" style="background-color: tomato;">
             <a class="dropdown-item" routerLink="/my/orders">My Orders</a>
             <a class="dropdown-item" *ngIf="authService.decodedToken.isAdmin" routerLink="/admin/orders">Manage Orders</a>
             <a class="dropdown-item" *ngIf="authService.decodedToken.isAdmin" routerLink="/admin/products">Manage Product</a>
             <a class="dropdown-item" *ngIf="authService.decodedToken.isAdmin" routerLink="/admin/categories">Manage Categories</a>
             <a class="dropdown-item" *ngIf="authService.decodedToken.isAdmin" routerLink="/admin/delivery-person">Manage Delivery Person</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" style="color:tomato" (click)="logout()"> Log Out</a>
+            <a class="dropdown-item" style="color:brown" (click)="logout()"> Log Out</a>
           </div>
         </li>
       </ul>

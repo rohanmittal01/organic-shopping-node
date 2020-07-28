@@ -44,6 +44,7 @@
           <div class="alert" style="color: red" *ngIf="cardNumber.touched && cardNumber.invalid">
             <div>Please enter a valid credit card number (digits only, no dashes or spaces).</div>
           </div>
+          <div *ngIf="cardError" style="color: red">Please enter a valid credit card number (digits only, no dashes or spaces).</div>
         </div>
       </div>
 
@@ -125,7 +126,7 @@
             Place Order
           </button>
           <br>
-          <div *ngIf="cardError">Please enter a valid credit card number (digits only, no dashes or spaces).</div>
+          
         </div>
       </div>
     </form>

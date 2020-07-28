@@ -1,7 +1,15 @@
 <div class="sticky-top">
+    <!-- <div class="d-flex">
+        <input required [(ngModel)]="range.min" #min="ngModel" name="min" id="min" type="number" placeholder="Min" class="form-control" style="width: 40px">
+        <input required [(ngModel)]="range.max" #max="ngModel" name="max" id="max" type="number" placeholder="Max" class="form-control" style="width: 40px">
+        <button routerLink="/" [queryParams]='{range: range}' style="width: 40px">Go</button>
+    </div> -->
     <a routerLink="/" class="list-group-item list-group-item-action" [queryParams]='{availability: "available"}' [class.active]="availability == 'available'">Available Only</a>
-    <div class="list-group">
-        <a routerLink="/" class="list-group-item list-group-item-action" [class.active]="!category">All Categories</a>
+
+
+    <div class="list-group mt-3">
+        <p>Choose Category</p>
+        <a routerLink="/" class="list-group-item list-group-item-action" [class.active]="!category && !availability">All Categories</a>
         <a *ngFor = "let c of categories" routerLink="/" [queryParams]='{category: c.key}'  
             class="list-group-item list-group-item-action"  [class.active]="category === c.key">
             {{c.name}}
