@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../_services/order.service';
+import { Router } from '@angular/router';
+import { AuthService } from '../_services/auth.service';
+import { AlertifyService } from '../_services/alertify.service';
+import { ShoppingCartService } from '../_services/shopping-cart.service';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -44,10 +48,12 @@ export class PaymentGatewayComponent implements OnInit {
   cardDigit;
   cardError = false;
   dateError = false;
-  constructor(private orderService: OrderService) {
-    console.log('datatatata');
-    console.log(orderService.orderData);
+  // tslint:disable-next-line: max-line-length
+  constructor(private orderService: OrderService, private route: Router, private authService: AuthService, private alertify: AlertifyService, private cartService: ShoppingCartService) {
     this.orderData = orderService.orderData;
+    console.log('------------------');
+    console.log(this.orderData);
+    console.log('----------------');
     // console.log(this.month[2]);
     // console.log(this.month);
   }
@@ -146,7 +152,20 @@ export class PaymentGatewayComponent implements OnInit {
   }
 
   proceed() {
-    console.log(this.card);
+    this.orderService.postOrder().subscribe(x => {
+      this.alertify.success('Order placed successfully!');
+      this.cartService.clearCart().subscribe(x => {
+        this.route.navigate(['/order-success/' + this.authService.decodedToken._id]);
+      }, error => {
+        this.alertify.error('Cart could not be cleared');
+      });
+      
+
+    }, error => {
+      console.log(error);
+      this.alertify.error('Order could not be placed!');
+    })
+    
   }
 
 
