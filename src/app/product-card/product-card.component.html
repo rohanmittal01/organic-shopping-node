@@ -2,10 +2,12 @@
     <img class="card-img-top" [src]="product.imageUrl" *ngIf="product.imageUrl" alt="{{product.title}}" />
     <div class="card-body">
       <h5 class="card-title">{{ product.title }}</h5>
+
       <p class="card-text">{{ product.price | currency: "INR" }}</p>
+      <p *ngIf="!product.isAvailable" class="card-text" style="color: red">Currently Unavailable</p>
     </div>
 
-    <div *ngIf="showActions" class="card-footer">
+    <div *ngIf="showActions && product.isAvailable" class="card-footer">
         <button *ngIf="getQuantity() == 0; else updateQuantity" (click)="addToCart();" class="btn btn-secondary btn-block">Add to Cart</button>
         <ng-template #updateQuantity>
           <div class="row no-gutters">
