@@ -19,8 +19,9 @@ export class ProductsComponent implements OnInit {
   cartSubscription: Subscription;
   availability;
   noProducts = false;
-  minRange: number;
-  maxRange: number;
+  minRange;
+  maxRange;
+  range;
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
@@ -48,9 +49,12 @@ export class ProductsComponent implements OnInit {
   }
 
   filter() {
+    console.log(this.productListCollection);
     this.route.queryParamMap.subscribe((params) => {
       this.availability = params.get('availability');
       this.category = params.get('category');
+      this.minRange = Number(params.get('minim'));
+      this.maxRange = Number(params.get('maxim'));
       if (this.availability) {
         this.productService.getAll().subscribe((x) => {
           this.filteredProducts = x;
@@ -60,6 +64,14 @@ export class ProductsComponent implements OnInit {
           (p: { category: string }) =>
             p.category.toLowerCase() == this.category.toLowerCase()
         );
+      } else if (this.minRange>=0 && this.maxRange>0){
+        let arr = [];
+        for(const pdt in this.productListCollection){
+          if(this.productListCollection[pdt].price >= this.minRange && this.productListCollection[pdt].price <= this.maxRange){
+            arr.push(this.productListCollection[pdt]);
+          }
+        }
+        this.filteredProducts = arr;
       } else {
         this.filteredProducts = this.productListCollection;
       }
@@ -73,8 +85,12 @@ export class ProductsComponent implements OnInit {
         this.noProducts == true;
       }
       // console.log(this.category);
+      console.log(this.filteredProducts);
+      console.log('------------------');
       console.log(this.category);
       console.log(this.availability);
+      console.log(this.minRange);
+      console.log(this.maxRange)
       //  console.log(this.filteredProducts);
     });
   }
