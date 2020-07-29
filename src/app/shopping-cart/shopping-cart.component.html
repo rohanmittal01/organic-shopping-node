@@ -26,7 +26,67 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let cartData of cartData.items">
+      <tr *ngFor="let cartData of availableCart.items">
+        <td><div [style.backgroundImage]="'url('+cartData.imageUrl+')'" class="thumbnail" alt=""></div></td>
+        <td>{{ cartData.title }}</td>
+        <td>
+        <div class="row no-gutters">
+          <div class="col-2" (click)="removeFromCart(cartData)">
+            <button style="display: inline; text-align: center;" class="btn btn-secondary">-</button>
+          </div>
+          <div class="col text-center">
+            {{ cartData.quantity }} in cart
+          </div>
+          <div class="col-2" (click)="addToCart(cartData)">
+            <button class="btn btn-secondary">+</button>
+          </div>
+        </div>
+      </td>
+        <td class="text-right">
+          {{ cartData.price }}
+        </td>
+        <td class="text-right">
+          {{ cartData.price * cartData.quantity }}
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th class="text-right" *ngIf="totalPrice">Total Price:</th>
+        <th class="text-right">{{ totalPrice | currency: "INR" }}</th>
+      </tr>
+    </tfoot>
+  </table>
+  <a *ngIf="shoppingCartItemCount" routerLink="/check-out" class="btn btn-primary btn-sm">Check Out</a>
+  <button *ngIf="shoppingCartItemCount" (click)="clearCart()" class="btn btn-danger btn-sm ml-2">
+    Clear Shopping Cart
+  </button>
+</ng-container>
+
+
+
+
+
+<h1 *ngIf="unavailableCart">Unavialable Items</h1>
+<ng-container *ngIf="unavailableCart">
+  <p *ngIf="!dataRetrieved">
+    Loading...
+  </p>
+  <table *ngIf="shoppingCartItemCount" class="table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th class="text-right">Price</th>
+        <th class="text-right">Total Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cartData of availableCart.items">
         <td><div [style.backgroundImage]="'url('+cartData.imageUrl+')'" class="thumbnail" alt=""></div></td>
         <td>{{ cartData.title }}</td>
         <td>
