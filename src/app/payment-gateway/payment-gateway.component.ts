@@ -13,7 +13,7 @@ import { RouteService } from '../_guards/route.service';
   styleUrls: ['./payment-gateway.component.css'],
 })
 export class PaymentGatewayComponent implements OnInit {
-  orderData;
+  orderData: any;
   card: any = {};
   monthArray: any = [
     '01',
@@ -52,6 +52,7 @@ export class PaymentGatewayComponent implements OnInit {
   // tslint:disable-next-line: max-line-length
   constructor(private orderService: OrderService, private route: Router, private authService: AuthService, private alertify: AlertifyService, private cartService: ShoppingCartService, private routeService: RouteService) {
     this.orderData = orderService.orderData;
+    this.orderData.card = {};
     console.log('------------------');
     console.log(this.orderData);
     console.log('----------------');
@@ -153,6 +154,21 @@ export class PaymentGatewayComponent implements OnInit {
   }
 
   proceed() {
+    let cardNumString: String = this.card.number.toString();
+    let len = cardNumString.length;
+    let splitNum = cardNumString.split('');
+    for(const i in splitNum){
+      // console.log(i);
+      if(Number(i) > 1 && Number(i) < (len - 2)){
+        splitNum[i] = "*";
+      }
+    }
+    console.log(splitNum);
+    console.log(splitNum.join(''));
+
+    this.orderData.card.number = splitNum.join('');
+    this.orderData.card.name = this.card.name;
+    this.orderService.orderData = this.orderData;
     this.orderService.postOrder().subscribe(x => {
       this.alertify.success('Order placed successfully!');
       this.cartService.clearCart().subscribe(x => {
