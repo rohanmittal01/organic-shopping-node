@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ShoppingCartService } from '../_services/shopping-cart.service';
 import { ProductService } from '../_services/product.service';
 import { AlertifyService } from '../_services/alertify.service';
+import { Router } from '@angular/router';
+import { RouteService } from '../_guards/route.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -17,7 +19,7 @@ export class ShoppingCartComponent implements OnInit {
   dataRetrieved = false;
   availableCart: any = [];
   unavailableCart: any;
-  constructor(private cartService: ShoppingCartService, private alertify: AlertifyService, private productService: ProductService) {
+  constructor(private cartService: ShoppingCartService, private alertify: AlertifyService, private productService: ProductService, private route: Router, private routerService: RouteService) {
     console.log('count ' + this.shoppingCartItemCount);
     this.dataRetrieval();
    }
@@ -139,6 +141,10 @@ export class ShoppingCartComponent implements OnInit {
   }
 
 
+  checkOut(){
+    this.routerService.checkOutRoute = true;
+    this.route.navigate(['/check-out']);
+  }
   clearCart(){
     this.cartService.clearCart().subscribe(x => {
       this.shoppingCartItemCount = 0;

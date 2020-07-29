@@ -51,6 +51,7 @@ import { PasswordService } from './_services/password.service';
 import { ShoppingCartService } from './_services/shopping-cart.service';
 import { OrderSuccessService } from './_guards/order-success.service';
 import { NoRouteComponent } from './no-route/no-route.component';
+import { RouteService } from './_guards/route.service';
 
 
 @NgModule({
@@ -105,9 +106,9 @@ import { NoRouteComponent } from './no-route/no-route.component';
       {path: 'login', component: LoginComponent},
       {path: 'register', component: RegisterComponent},
 
-      {path: 'check-out', component: CheckOutComponent},
-      {path: 'payment-gateway', component: PaymentGatewayComponent, canActivate: [AuthGuardService]},
-      {path: 'order-success/:id', component: OrderSuccessComponent, canActivate: [AuthGuardService, OrderSuccessService]},
+      {path: 'check-out', component: CheckOutComponent, canActivate: [AuthGuardService, RouteService]},
+      {path: 'payment-gateway', component: PaymentGatewayComponent, canActivate: [AuthGuardService, RouteService]},
+      {path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuardService, RouteService]},
       {path: 'my/orders', component: MyOrdersComponent, canActivate: [AuthGuardService]},
 
      {path: 'admin/products/new', component: ProductFormComponent},
@@ -136,7 +137,8 @@ import { NoRouteComponent } from './no-route/no-route.component';
     DeliveryPersonService,
     PasswordService,
     ShoppingCartService,
-    OrderSuccessService
+    OrderSuccessService,
+    RouteService
   ],
   bootstrap: [AppComponent]
 })

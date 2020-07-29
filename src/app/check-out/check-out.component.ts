@@ -7,6 +7,7 @@ import { AlertifyService } from '../_services/alertify.service';
 import { PasswordService } from '../_services/password.service';
 import { Router } from '@angular/router';
 import { OrderService } from '../_services/order.service';
+import { RouteService } from '../_guards/route.service';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -35,7 +36,8 @@ export class CheckOutComponent implements OnInit {
     private alertify: AlertifyService,
     private passwordService: PasswordService,
     private route: Router,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private routeService: RouteService
   ) {
     this.dataRetrieval();
   }
@@ -149,6 +151,7 @@ export class CheckOutComponent implements OnInit {
       status: 'Order Placed',
       deliveryPerson: 'NA'
     };
+    this.routeService.paymentGatewayRoute = true;
     this.orderService.orderData = order;
     this.route.navigate(['/payment-gateway']);
     console.log(order);

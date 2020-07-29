@@ -60,7 +60,7 @@
       </tr>
     </tfoot>
   </table>
-  <a *ngIf="shoppingCartItemCount" routerLink="/check-out" class="btn btn-primary btn-sm">Check Out</a>
+  <a *ngIf="shoppingCartItemCount" (click)="checkOut()" class="btn btn-primary btn-sm">Check Out</a>
   <button *ngIf="shoppingCartItemCount" (click)="clearCart()" class="btn btn-danger btn-sm ml-2">
     Clear Shopping Cart
   </button>

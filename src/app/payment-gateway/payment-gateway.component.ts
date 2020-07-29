@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../_services/auth.service';
 import { AlertifyService } from '../_services/alertify.service';
 import { ShoppingCartService } from '../_services/shopping-cart.service';
+import { RouteService } from '../_guards/route.service';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -49,7 +50,7 @@ export class PaymentGatewayComponent implements OnInit {
   cardError = false;
   dateError = false;
   // tslint:disable-next-line: max-line-length
-  constructor(private orderService: OrderService, private route: Router, private authService: AuthService, private alertify: AlertifyService, private cartService: ShoppingCartService) {
+  constructor(private orderService: OrderService, private route: Router, private authService: AuthService, private alertify: AlertifyService, private cartService: ShoppingCartService, private routeService: RouteService) {
     this.orderData = orderService.orderData;
     console.log('------------------');
     console.log(this.orderData);
@@ -155,7 +156,8 @@ export class PaymentGatewayComponent implements OnInit {
     this.orderService.postOrder().subscribe(x => {
       this.alertify.success('Order placed successfully!');
       this.cartService.clearCart().subscribe(x => {
-        this.route.navigate(['/order-success/' + this.authService.decodedToken._id]);
+        this.routeService.orderSuccessRoute = true;
+        this.route.navigate(['/order-success']);
       }, error => {
         this.alertify.error('Cart could not be cleared');
       });
