@@ -66,20 +66,20 @@ export class ShoppingCartService {
   cartCount(): any{
 
     let count = 0;
-    console.log(this.cart);
+    // console.log(this.cart);
     this.getCart().subscribe(x => {
-      console.log('data');
-      console.log(x);
+      // console.log('data');
+      // console.log(x);
       this.cart = x;
       let shoppingCartItemCount = 0;
-      console.log(this.cart);
+      // console.log(this.cart);
       for (const productId in this.cart.items){
         shoppingCartItemCount += this.cart.items[productId].quantity;
       }
-      console.log('count - ' + shoppingCartItemCount);
+      // console.log('count - ' + shoppingCartItemCount);
       count = shoppingCartItemCount;
     }, error => {
-      console.log('An error occurred');
+      // console.log('An error occurred');
       count = 0;
     });
 

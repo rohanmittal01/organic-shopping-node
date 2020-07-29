@@ -1,0 +1,17 @@
+
+
+.vertically-center{
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+button{
+    background-color: teal;
+    color: white;
+}
+button:hover{
+    opacity: 0.7;
+    color: white;
+}

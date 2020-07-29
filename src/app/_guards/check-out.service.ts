@@ -18,10 +18,10 @@ export class CheckOutService {
     this.shoppingCartItemCount = 0;
     // tslint:disable-next-line: forin
     this.shoppingCartItemCount = this.cartService.cartCount();
-    console.log('countuhiuyhiubibiubiubiub ');
-    console.log(this.shoppingCartItemCount);
+    // console.log('countuhiuyhiubibiubiubiub ');
+    // console.log(this.shoppingCartItemCount);
     if (this.cartService.cartCount() > 0) {
-      console.log('fdnjkvehfdbjkvnedhbfkjvbfv');
+      // console.log('fdnjkvehfdbjkvnedhbfkjvbfv');
       return true;
     }
     this.alertify.error('Your cart is empty!');

@@ -37,7 +37,7 @@ export class ProductsComponent implements OnInit {
   getCart() {
     this.cartService.getCart().subscribe((data: any) => {
       this.cart = data;
-    });
+    }, error => {});
   }
 
   getProducts() {
@@ -49,7 +49,7 @@ export class ProductsComponent implements OnInit {
   }
 
   filter() {
-    console.log(this.productListCollection);
+    // console.log(this.productListCollection);
     this.route.queryParamMap.subscribe((params) => {
       this.availability = params.get('availability');
       this.category = params.get('category');
@@ -58,6 +58,8 @@ export class ProductsComponent implements OnInit {
       if (this.availability) {
         this.productService.getAll().subscribe((x) => {
           this.filteredProducts = x;
+        }, error => {
+
         });
       } else if (this.category) {
         this.filteredProducts = this.productListCollection.filter(
@@ -85,12 +87,12 @@ export class ProductsComponent implements OnInit {
         this.noProducts == true;
       }
       // console.log(this.category);
-      console.log(this.filteredProducts);
-      console.log('------------------');
-      console.log(this.category);
-      console.log(this.availability);
-      console.log(this.minRange);
-      console.log(this.maxRange)
+      // console.log(this.filteredProducts);
+      // console.log('------------------');
+      // console.log(this.category);
+      // console.log(this.availability);
+      // console.log(this.minRange);
+      // console.log(this.maxRange)
       //  console.log(this.filteredProducts);
     });
   }

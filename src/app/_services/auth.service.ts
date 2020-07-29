@@ -40,7 +40,7 @@ export class AuthService {
   logout(){
     if(this.loggedIn()){
       localStorage.removeItem('token');
-      console.log('logged out!');
+      // console.log('logged out!');
       this.alertify.warning('Logged Out!');
       window.location.reload();
       this.route.navigate(['/login']);

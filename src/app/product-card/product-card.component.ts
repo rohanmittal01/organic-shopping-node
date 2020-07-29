@@ -107,10 +107,10 @@ export class ProductCardComponent implements OnInit {
 
   addUsingButton(){
     this.quantity = this.quantity + 1;
-    console.log(this.quantity);
+    // console.log(this.quantity);
     this.cartService.addToCart(this.product);
     this.getQuantity();
-    console.log(this.shoppingCart);
+    // console.log(this.shoppingCart);
 
   }
 

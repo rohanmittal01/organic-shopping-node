@@ -27,7 +27,7 @@ export class AppComponent {
           this.cartService.cart = [];
         }
         // console.log(this.cartService.cart);
-      });
+      }, error => {});
       
       // this.authService.logged = true;
     }

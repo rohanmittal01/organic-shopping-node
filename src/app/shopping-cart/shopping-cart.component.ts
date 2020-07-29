@@ -28,6 +28,7 @@ export class ShoppingCartComponent implements OnInit {
     this.cartService.getCart().subscribe(x => {
       this.cartData = x;
       this.dataRetrieved = true;
+      console.log(this.cartData);
       this.getShoppingCartItemCount();
       this.getTotalPrice();
     }, error => {

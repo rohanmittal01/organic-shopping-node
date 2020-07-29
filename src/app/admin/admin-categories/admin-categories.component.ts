@@ -28,7 +28,7 @@ export class AdminCategoriesComponent{
   constructor(private categoryService: CategoryService, private alertify: AlertifyService) {
 
     this.categoryService.getAll().subscribe(products => {
-      console.log(products);
+      // console.log(products);
       this.array = products;
       this.listData = new MatTableDataSource(this.array);
       this.listData.sort = this.sort;

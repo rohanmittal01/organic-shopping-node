@@ -21,13 +21,13 @@ export class ProductFilterComponent implements OnInit{
 
     categoryService.getAll().subscribe((x: any) => {
       this.categories = x;
-      console.log(this.categories);
+      // console.log(this.categories);
     })
 
   }
 
   print(){
-    console.log(this.range);
+    // console.log(this.range);
   }
 
   

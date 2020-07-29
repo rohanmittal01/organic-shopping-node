@@ -49,6 +49,8 @@ import { CategoryService } from './_services/category.service';
 import { DeliveryPersonService } from './_services/delivery-person.service';
 import { PasswordService } from './_services/password.service';
 import { ShoppingCartService } from './_services/shopping-cart.service';
+import { OrderSuccessService } from './_guards/order-success.service';
+import { NoRouteComponent } from './no-route/no-route.component';
 
 
 @NgModule({
@@ -75,7 +77,8 @@ import { ShoppingCartService } from './_services/shopping-cart.service';
     ActiveDialogComponent,
     BannerComponent,
     ShoppingCartSummaryComponent,
-    PaymentGatewayComponent
+    PaymentGatewayComponent,
+    NoRouteComponent
   ],
   imports: [
     BrowserModule,
@@ -104,7 +107,7 @@ import { ShoppingCartService } from './_services/shopping-cart.service';
 
       {path: 'check-out', component: CheckOutComponent},
       {path: 'payment-gateway', component: PaymentGatewayComponent, canActivate: [AuthGuardService]},
-      {path: 'order-success/:id', component: OrderSuccessComponent, canActivate: [AuthGuardService]},
+      {path: 'order-success/:id', component: OrderSuccessComponent, canActivate: [AuthGuardService, OrderSuccessService]},
       {path: 'my/orders', component: MyOrdersComponent, canActivate: [AuthGuardService]},
 
      {path: 'admin/products/new', component: ProductFormComponent},
@@ -117,7 +120,8 @@ import { ShoppingCartService } from './_services/shopping-cart.service';
       {path: 'admin/categories', component: AdminCategoriesComponent, canActivate: [AuthGuardService]},
       {path: 'admin/deliveryperson/new', component: DeliveryPersonFormComponent, canActivate: [AuthGuardService]},
       {path: 'admin/deliveryperson/:id', component: DeliveryPersonFormComponent, canActivate: [AuthGuardService]},
-      {path: 'admin/deliveryperson', component: AdminDeliverPersonComponent, canActivate: [AuthGuardService]}
+      {path: 'admin/deliveryperson', component: AdminDeliverPersonComponent, canActivate: [AuthGuardService]},
+      {path: '**', component: NoRouteComponent, canActivate: [AuthGuardService]}
     ])
   ],
   providers: [
@@ -131,7 +135,8 @@ import { ShoppingCartService } from './_services/shopping-cart.service';
     CategoryService,
     DeliveryPersonService,
     PasswordService,
-    ShoppingCartService
+    ShoppingCartService,
+    OrderSuccessService
   ],
   bootstrap: [AppComponent]
 })

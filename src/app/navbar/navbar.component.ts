@@ -37,7 +37,7 @@ export class NavbarComponent implements OnInit {
     this.cartService.getCart().subscribe(x => {
       this.cartData = x;
       this.getShoppingCartItemCount();
-    });
+    }, error => {});
   }
 
   getShoppingCartItemCount(){

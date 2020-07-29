@@ -28,7 +28,7 @@ export class ShoppingCartSummaryComponent implements OnInit {
       this.cartData = x;
       this.getShoppingCartItemCount();
       this.getTotalPrice();
-    });
+    }, error => {});
   }
 
   getShoppingCartItemCount(){
