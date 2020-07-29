@@ -83,9 +83,8 @@ export class ShoppingCartComponent implements OnInit {
     console.log(available);
     console.log(unavailable);
     this.availableCart = available;
-    if(unavailable.items.length == 0){
-      // this.unavailableCart = [];
-    }else{
+    this.cartService.availableCartData = this.availableCart;
+    if(unavailable.items.length != 0){
     this.unavailableCart = unavailable;
     }
     console.log(this.unavailableCart);

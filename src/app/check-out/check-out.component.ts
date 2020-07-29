@@ -43,11 +43,15 @@ export class CheckOutComponent implements OnInit {
   ngOnInit(): void {}
 
   dataRetrieval() {
-    this.cartService.getCart().subscribe((x) => {
-      this.cartData = x;
-      console.log(this.cartData);
-      this.getTotalPrice();
-    });
+    // this.cartService.getCart().subscribe((x) => {
+    //   this.cartData = x;
+    //   console.log(this.cartData);
+    //   this.getTotalPrice();
+    // });
+    this.cartData = this.cartService.availableCartData;
+    console.log('availlllllll');
+    console.log(this.cartData);
+    this.getTotalPrice();
   }
 
   getTotalPrice() {

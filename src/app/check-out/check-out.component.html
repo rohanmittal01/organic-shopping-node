@@ -110,7 +110,7 @@
       <button type="submit" class="btn btn-primary" [disabled]="!f.valid || totalPrice==0">
         Place Order
       </button>
-      <p *ngIf="totalPrice==0">Your shopping cart is empty!</p>
+      <p *ngIf="totalPrice==0" style="color: red">Your shopping cart is empty!</p>
     </form>
 
     <div *ngIf="passwordSent">

@@ -24,11 +24,14 @@ export class ShoppingCartSummaryComponent implements OnInit {
 
 
   async dataRetrieval(){
-    await this.cartService.getCart().subscribe(x => {
-      this.cartData = x;
-      this.getShoppingCartItemCount();
-      this.getTotalPrice();
-    }, error => {});
+    // await this.cartService.getCart().subscribe(x => {
+    //   this.cartData = x;
+    //   this.getShoppingCartItemCount();
+    //   this.getTotalPrice();
+    // }, error => {});
+    this.cartData = this.cartService.availableCartData;
+    this.getShoppingCartItemCount();
+    this.getTotalPrice();
   }
 
   getShoppingCartItemCount(){

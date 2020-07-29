@@ -11,6 +11,7 @@ export class ShoppingCartService {
   cart: any;
   constructor(private http: HttpClient, private authService: AuthService) {}
 
+  availableCartData: any;
   getCart() {
     return this.http.get(this.baseUrl + this.authService.decodedToken._id);
   }
