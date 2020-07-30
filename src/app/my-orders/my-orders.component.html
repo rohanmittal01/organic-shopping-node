@@ -1,5 +1,4 @@
 <div>
-    <button mat-raised-button><a routerLink="/admin/categories/new"><mat-icon>add</mat-icon> Add</a></button>
       <mat-form-field class="search-form-field">
         <mat-label>Search</mat-label>
         <input
@@ -32,26 +31,30 @@
               paginatorRef.pageIndex * paginatorRef.pageSize + (i + 1)
             }}</mat-cell>
           </ng-container>
-      <ng-container matColumnDef="key">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Key</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{ element.key }}</mat-cell>
+      <ng-container matColumnDef="datePlaced">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Date</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.datePlaced }}</mat-cell>
       </ng-container>
-      <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{ element.name }}</mat-cell>
+      <ng-container matColumnDef="quantity">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Quantity</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.quantity }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="totalAmount">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Amount</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.totalAmount }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            <p *ngIf="element.status == 'Order Placed'" style="color: orange">{{ element.status }}</p>
+            <p *ngIf="element.status == 'Delivered'" style="color: green">{{ element.status }}</p>
+        </mat-cell>
       </ng-container>
       <ng-container matColumnDef="$key">
         <mat-header-cell *matHeaderCellDef>Edit</mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <button mat-icon-button type="button">
-            <a [routerLink]="['/admin/categories/', element._id]" style="color: green;"
-              ><mat-icon>create</mat-icon></a
-            >
-          </button>
-          <button mat-icon-button type="button" >
-            <a [routerLink]="['/admin/categories/']" (click)='delete(element._id)' style="color: red;"
-              ><mat-icon>delete</mat-icon></a
-            >
+          <button type="button" class="btn btn-primary" style="color: white; background-color: teal;" [routerLink]="['/admin/categories/', element._id]" >
+            View more
           </button>
         </mat-cell>
       </ng-container>

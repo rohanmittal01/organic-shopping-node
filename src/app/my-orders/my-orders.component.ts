@@ -19,7 +19,7 @@ export class MyOrdersComponent{
   filteredCategories: any[];
   subscribe: Subscription;
   listData: MatTableDataSource<any>;
-  displayedColumns: string[] = ['sno', 'key', 'name', '$key'];
+  displayedColumns: string[] = ['sno', 'datePlaced', 'quantity', 'totalAmount', 'status', '$key'];
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   searchKey: string;
@@ -28,18 +28,26 @@ export class MyOrdersComponent{
   constructor(private categoryService: CategoryService, private alertify: AlertifyService, private orderService: OrderService) {
     this.orderService.getOrders().subscribe(orders => {
       console.log(orders);
+      this.convertDate(orders);
+      
     });
 
     this.categoryService.getAll().subscribe(products => {
       // console.log(products);
-      this.array = products;
+      
+    });
+   }
+   convertDate(orders){
+    // tslint:disable-next-line: forin
+    for (const id in orders){
+      // orders.datePlaced = orders[id].datePlaced.toLocaleString();
+      orders[id].datePlaced = new Date(orders[id].datePlaced).toLocaleString();
+    }
+    this.array = orders;
       this.listData = new MatTableDataSource(this.array);
       this.listData.sort = this.sort;
       this.listData.paginator = this.paginator;
-    });
    }
-
-
    applyFilter(){
     this.listData.filter = this.searchKey.toLowerCase();
   }
@@ -48,24 +56,5 @@ export class MyOrdersComponent{
     this.applyFilter();
   }
 
-  delete(id) {
-    this.categoryService.delete(id).subscribe(
-      (x) => {
-        for (const category in this.array){
-          // tslint:disable-next-line: triple-equals
-          if (this.array[category]._id == id){
-            this.array.splice(category, 1);
-            this.listData = new MatTableDataSource(this.array);
-            this.listData.sort = this.sort;
-            this.listData.paginator = this.paginator;
-            this.alertify.success('Product deleted successfully!');
-            return;
-          }
-        }
-      },
-      (error) => {
-        this.alertify.error('Category could not be deleted!');
-      }
-    );
-  }
+ 
 }
