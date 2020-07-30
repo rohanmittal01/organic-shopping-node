@@ -20,7 +20,7 @@ export class ShoppingCartComponent implements OnInit {
   availableCart: any = [];
   unavailableCart: any;
   constructor(private cartService: ShoppingCartService, private alertify: AlertifyService, private productService: ProductService, private route: Router, private routerService: RouteService) {
-    console.log('count ' + this.shoppingCartItemCount);
+    // console.log('count ' + this.shoppingCartItemCount);
     this.dataRetrieval();
    }
 
@@ -35,8 +35,8 @@ export class ShoppingCartComponent implements OnInit {
       this.cartService.getCart().subscribe(x => {
         this.cartData = x;
         this.dataRetrieved = true;
-        console.log(this.cartData);
-        console.log(this.availableData);
+        // console.log(this.cartData);
+        // console.log(this.availableData);
         this.filterData();
         this.getShoppingCartItemCount();
         this.getTotalPrice();
@@ -51,11 +51,11 @@ export class ShoppingCartComponent implements OnInit {
     available.items = [];
     const unavailable = JSON.parse(JSON.stringify(this.cartData));
     unavailable.items = [];
-    console.log('--------------------------------------');
+    // console.log('--------------------------------------');
   
-    console.log(available);
-    console.log(unavailable);
-    console.log('during filtering');
+    // console.log(available);
+    // console.log(unavailable);
+    // console.log('during filtering');
     // tslint:disable-next-line: forin
     for (const cartItemId in this.cartData.items){
       console.log(this.cartData.items[cartItemId]);
@@ -71,25 +71,25 @@ export class ShoppingCartComponent implements OnInit {
       if (found == 1){
         product.quantity = this.cartData.items[cartItemId].quantity;
         available.items.push(product);
-        console.log('found');
+        // console.log('found');
         
       }else{
         unavailable.items.push(this.cartData.items[cartItemId]);
-        console.log('not found');
+        // console.log('not found');
       }
       // console.log(unavailable);
       // console.log(available);
     }
-    console.log('-----------------------------------------------------------------');
-    console.log('After filtering');
-    console.log(available);
-    console.log(unavailable);
+    // console.log('-----------------------------------------------------------------');
+    // console.log('After filtering');
+    // console.log(available);
+    // console.log(unavailable);
     this.availableCart = available;
     this.cartService.availableCartData = this.availableCart;
     if(unavailable.items.length != 0){
     this.unavailableCart = unavailable;
     }
-    console.log(this.unavailableCart);
+    // console.log(this.unavailableCart);
   
   }
 
@@ -99,7 +99,7 @@ export class ShoppingCartComponent implements OnInit {
     for (const productId in this.availableCart.items){
       this.shoppingCartItemCount += this.availableCart.items[productId].quantity;
     }
-    console.log(this.shoppingCartItemCount);
+    // console.log(this.shoppingCartItemCount);
   }
 
   getTotalPrice(){

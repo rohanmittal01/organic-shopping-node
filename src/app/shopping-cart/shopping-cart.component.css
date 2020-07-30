@@ -12,6 +12,7 @@ th {
   
   .noDataButton{
       color: white;
+      text-decoration: none;
   }
   
   .thumbnail{

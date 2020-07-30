@@ -130,6 +130,15 @@ export class CheckOutComponent implements OnInit {
         price: this.cartData.items[id].price,
       });
     }
+
+   let shoppingCartItemCount = 0;
+    // tslint:disable-next-line: forin
+    for (const productId in this.cartData.items){
+      shoppingCartItemCount += this.cartData.items[productId].quantity;
+    }
+    console.log(shoppingCartItemCount);
+
+
     const order = {
       userId: this.authService.decodedToken._id,
       datePlaced: new Date(Date()),
@@ -147,14 +156,16 @@ export class CheckOutComponent implements OnInit {
         deliveryCharges: this.deliveryCharges,
         taxes: this.taxes
       },
+      quantity: shoppingCartItemCount,
       totalAmount: this.totalPrice.toFixed(2),
       status: 'Order Placed',
       deliveryPerson: 'NA'
     };
     this.routeService.paymentGatewayRoute = true;
     this.orderService.orderData = order;
-    this.route.navigate(['/payment-gateway']);
     console.log(order);
+    this.route.navigate(['/payment-gateway']);
+    
 
   }
 

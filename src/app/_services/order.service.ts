@@ -16,4 +16,8 @@ export class OrderService {
     return this.http.post(this.baseUrl + 'orders', this.orderData);
   }
 
+  getOrders(){
+    return this.http.get(this.baseUrl + 'orders/' + this.authService.decodedToken._id);
+  }
+
 }
