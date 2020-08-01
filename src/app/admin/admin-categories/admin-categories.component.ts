@@ -27,6 +27,11 @@ export class AdminCategoriesComponent{
 
   constructor(private categoryService: CategoryService, private alertify: AlertifyService) {
 
+   this.reload();
+   }
+
+
+   reload(){
     this.categoryService.getAll().subscribe(products => {
       // console.log(products);
       this.array = products;
@@ -35,8 +40,6 @@ export class AdminCategoriesComponent{
       this.listData.paginator = this.paginator;
     });
    }
-
-
    applyFilter(){
     this.listData.filter = this.searchKey.toLowerCase();
   }

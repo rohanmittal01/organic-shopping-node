@@ -1,5 +1,24 @@
 <div>
-    <button mat-raised-button><a routerLink="/admin/categories/new"><mat-icon>add</mat-icon> Add</a></button>
+    <button
+        class="ml-2"
+        style="color: blue;"
+        mat-raised-button
+        routerLink="/admin/categories/new"
+      >
+        <span class="material-icons">
+          <mat-icon>add</mat-icon>
+        </span>
+      </button>
+    <button
+        class="ml-2"
+        style="color: blue;"
+        mat-raised-button
+        (click)="reload()"
+      >
+        <span class="material-icons">
+          autorenew
+        </span>
+      </button>
       <mat-form-field class="search-form-field">
         <mat-label>Search</mat-label>
         <input
