@@ -66,7 +66,7 @@ export class ProductsComponent implements OnInit {
           (p: { category: string }) =>
             p.category.toLowerCase() == this.category.toLowerCase()
         );
-      } else if (this.minRange>=0 && this.maxRange>0){
+      } else if (this.minRange >= 0 && this.maxRange > 0){
         let arr = [];
         for(const pdt in this.productListCollection){
           if(this.productListCollection[pdt].price >= this.minRange && this.productListCollection[pdt].price <= this.maxRange){

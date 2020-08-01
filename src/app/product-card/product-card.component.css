@@ -4,8 +4,8 @@
 }
 .card{
     margin-bottom: 30px;
-    height: 370px;
-    width: 200px;
+    height: 320px;
+    /* width: 200px; */
     transition: transform .2s;
 }
 .card:hover{
@@ -16,9 +16,9 @@
 }
 
 img {
-    height: 200px;
+    height: 150px;
     max-width: none;
-    max-width: 200px;
+    /* max-width: 200px; */
     object-fit: cover;
 }
 /* img{
