@@ -120,6 +120,7 @@ import { ProductDetailsComponent } from './products/product-details/product-deta
       {path: 'admin/products/:id', component: ProductFormComponent},
       {path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuardService]},
       {path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuardService]},
+      {path: 'admin/order/:id', component: OrdersEditComponent, canActivate: [AuthGuardService]},
       {path: 'admin/delivery-person', component: AdminDeliverPersonComponent, canActivate: [AuthGuardService]},
       {path: 'admin/categories/new', component: CategoryformComponent, canActivate: [AuthGuardService]},
       {path: 'admin/categories/:id', component: CategoryformComponent, canActivate: [AuthGuardService]},
