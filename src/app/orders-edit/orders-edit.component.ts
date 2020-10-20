@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { OrderService } from 'src/app/_services/order.service';
-import { AlertifyService } from 'src/app/_services/alertify.service';
 import { ActivatedRoute } from '@angular/router';
-import { DeliveryPersonService } from 'src/app/_services/delivery-person.service';
-import { ProductService } from 'src/app/_services/product.service';
+import { AlertifyService } from '../_services/alertify.service';
+import { DeliveryPersonService } from '../_services/delivery-person.service';
+import { OrderService } from '../_services/order.service';
+import { ProductService } from '../_services/product.service';
 
 @Component({
-  selector: 'app-more-order-details',
-  templateUrl: './more-order-details.component.html',
-  styleUrls: ['./more-order-details.component.css']
+  selector: 'app-orders-edit',
+  templateUrl: './orders-edit.component.html',
+  styleUrls: ['./orders-edit.component.css']
 })
-export class MoreOrderDetailsComponent implements OnInit {
+export class OrdersEditComponent implements OnInit {
+
   id;
   orderDetails: any = {};
   products = [];
@@ -24,6 +25,7 @@ export class MoreOrderDetailsComponent implements OnInit {
     private alertify: AlertifyService
   ) {
     this.id = this.route.snapshot.paramMap.get('id');
+    this.getDeliveryPerson();
     this.getOrderInfo();
     console.log(this.products);
   }
@@ -42,10 +44,11 @@ export class MoreOrderDetailsComponent implements OnInit {
 
   getProductDetails() {
     // tslint:disable-next-line: forin
+    console.log('hi');
     for (const id in this.orderDetails.items) {
       // console.log(cart);
       // tslint:disable-next-line: triple-equals
-      this.productService.get(this.orderDetails.items[id].productId).subscribe((x: any) => {
+      this.productService.get(this.orderDetails.items[id].productId).subscribe((x:any) => {
         x.quantity = this.orderDetails.items[id].quantity;
         this.products.push(x);
       });
@@ -53,7 +56,24 @@ export class MoreOrderDetailsComponent implements OnInit {
     }
   }
 
-
-  ngOnInit(): void {
+  getDeliveryPerson(){
+    console.log('hi');
+    this.deliveryService.getAvailable().subscribe(x => {
+      this.deliveryPersons = x;
+      console.log('hi');
+      console.log(this.deliveryPersons);
+    });
   }
+
+  update(){
+    console.log(this.orderDetails.status);
+    console.log(this.orderDetails.deliveryPerson); 
+    this.orderService.updateOrder({id: this.id, body: this.orderDetails}).subscribe(x => {
+      this.alertify.success('Order details updated successfully!');
+    }, error => {
+      this.alertify.error('Order details could not be updated!');
+    });
+  }
+  ngOnInit(): void {}
+
 }

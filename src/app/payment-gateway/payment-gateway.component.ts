@@ -142,7 +142,6 @@ export class PaymentGatewayComponent implements OnInit {
     // tslint:disable-next-line: forin
     for (const num in reversedNum) {
       // tslint:disable-next-line: radix
-      // tslint:disable-next-line: triple-equals
       if (parseInt(num) % 2 == 0){
         // console.log(reversedNum[num]);
         reversedNum[num] = reversedNum[num] * 2;

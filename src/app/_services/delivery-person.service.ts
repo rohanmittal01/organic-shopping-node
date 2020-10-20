@@ -24,6 +24,10 @@ export class DeliveryPersonService {
     return this.http.get(this.baseUrl + 'deliveryperson/' + id);
   }
 
+  getAvailable(){
+    return this.http.get(this.baseUrl + 'deliveryperson/available');
+  }
+
   update(id, person){
     return this.http.patch(this.baseUrl + 'deliveryperson/' + id, person);
   }

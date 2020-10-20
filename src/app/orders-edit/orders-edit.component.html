@@ -1,0 +1,91 @@
+<h2>Order Details</h2>
+<div class="row" style="background: rgba(0, 0, 0, 0.6); padding:10px; color: black; border-radius: 10px;">
+  <div class="col-md-6 mt-2" style="background-color: white; padding: 15px;">
+      <div class="form-group">
+          <label for="">Shipping Address</label>
+          <pre><i>
+              {{orderDetails.shipping.name}}
+              {{orderDetails.shipping.addressLine1}}
+              {{orderDetails.shipping.addressLine2}}
+              {{orderDetails.shipping.city}}, {{orderDetails.shipping.state}}
+              {{orderDetails.shipping.country}}
+            </i>
+            </pre>
+      </div>
+      <div class="form-group">
+        <p><label>Contact Number:</label><i>  {{orderDetails.phoneNumber}}</i></p>
+    </div>
+      <div class="form-group">
+          <p><label>Date Placed:</label><i>  {{date}}</i></p>
+      </div>
+      <div class="form-group">
+        <label for="category">Order Status</label>
+        <select required [(ngModel)]="orderDetails.status" #status="ngModel" name="status" id="status" type="text" class="form-control">
+            <option value="Delivered" style="color: green">Delivered</option>
+            <option value="Order Placed" style="color: yellow;">Order Placed</option>
+            <option value="Returned" style="color: red;">Returned</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="category">Deliveryperson</label>
+        <select required [(ngModel)]="orderDetails.deliveryPerson" #deliveryPerson="ngModel" name="deliveryPerson" id="deliveryPerson" type="text" class="form-control">
+            <option value="NA">NA</option>
+            <option *ngFor="let delivery of deliveryPersons" value="{{delivery.name}}">{{delivery.name}}</option>
+        </select>
+    </div>
+    <button class="btn btn-outline-success w-100" (click)="update()">Update</button>
+  </div>
+  <div class="col-sm-6 mt-2">
+      <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Payment Details</h5>
+            <p>
+                Name: {{orderDetails.card.name}}<br>
+                Number: {{orderDetails.card.number}}
+            </p>
+        </div>
+      </div>
+      <br>
+    <div class="card">
+      <div *ngIf="!products" class="card-body">
+        <h5 class="card-title">Ordered Items</h5>
+        Loading...
+      </div>
+      <div *ngIf="products" class="card-body">
+        <h5 class="card-title">Ordered Items</h5>
+        <p class="card-text">
+          Total {{ orderDetails.quantity }} items in Order.
+        </p>
+        <ul class="list-group list-group-flush">
+          <li *ngFor="let cartData of products" class="list-group-item">
+            {{ cartData.quantity }} x
+            {{ cartData.Common_Name }}
+            <div class="float-right">
+              {{ cartData.quantity * cartData.price | currency: "INR" }}
+            </div>
+          </li>
+          <li class="list-group-item font-weight-bold">
+            Tax (5%)
+            <div class="float-right">
+              {{ orderDetails.additionalCharges.taxes | currency: "INR" }}
+            </div>
+          </li>
+          <li class="list-group-item font-weight-bold">
+            Delivery Charges
+            <div class="float-right">
+              {{
+                orderDetails.additionalCharges.deliveryCharges | currency: "INR"
+              }}
+            </div>
+          </li>
+          <li class="list-group-item font-weight-bold">
+            Total
+            <div class="float-right">
+              {{ orderDetails.totalAmount | currency: "INR" }}
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

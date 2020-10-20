@@ -54,6 +54,7 @@ import { NoRouteComponent } from './no-route/no-route.component';
 import { RouteService } from './_guards/route.service';
 import { MoreOrderDetailsComponent } from './my-orders/more-order-details/more-order-details.component';
 import { ProductDetailsComponent } from './products/product-details/product-details.component';
+import { OrdersEditComponent } from './orders-edit/orders-edit.component';
 
 
 @NgModule({
@@ -83,7 +84,8 @@ import { ProductDetailsComponent } from './products/product-details/product-deta
     PaymentGatewayComponent,
     NoRouteComponent,
     MoreOrderDetailsComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    OrdersEditComponent
   ],
   imports: [
     BrowserModule,
