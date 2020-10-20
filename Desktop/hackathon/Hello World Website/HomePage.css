@@ -1,0 +1,118 @@
+body {
+  color: rgba(0,224,254,1);
+}
+
+ul {
+  font-size: 20px; 
+}
+
+/* Add a black background color to the top navigation */
+.topnav {
+  background-color: transparent;
+  overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Add an active class to highlight the current page */
+.topnav a.active {
+  background-color: #dd2476;
+  color: white;
+}
+
+/* Hide the link that should open and close the topnav on small screens */
+.topnav .icon {
+  display: none;
+}
+
+ol {
+  font-size: 20px; 
+}
+
+
+#main {
+  background: black;
+  font-family: "Quicksand", sans-serif;
+
+  color: rgba(0,224,254,1);
+}
+
+
+/* Place the navbar at the bottom of the page, and make it stick */
+.navbar {
+  background-color: #dd2476;
+  overflow: hidden;
+
+}
+
+/* Style the links inside the navigation bar */
+.navbar a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+/* Change the color of links on hover */
+.navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Add a green background color to the active link */
+.navbar a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* Hide the link that should open and close the navbar on small screens */
+.navbar .icon {
+  display: none;
+}
+
+#body1 {
+  padding: 0px 20px; 
+}
+
+#body2 {
+  padding: 0px 30px; 
+}
+
+#body3 {
+  padding: 0px 30px;
+}
+
+img {
+	width: 144px;
+	height: 120px;
+}
+
+button {
+  background: transparent;
+}
+
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 10%;
+}

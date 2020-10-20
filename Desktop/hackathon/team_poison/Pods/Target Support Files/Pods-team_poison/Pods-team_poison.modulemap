@@ -1,0 +1,6 @@
+framework module Pods_team_poison {
+  umbrella header "Pods-team_poison-umbrella.h"
+
+  export *
+  module * { export * }
+}

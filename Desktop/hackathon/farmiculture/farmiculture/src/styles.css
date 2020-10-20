@@ -1,0 +1,12 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/dist/css/bootstrap.css';
+@import 'https://fonts.googleapis.com/icon?family=Material+Icons';
+/* body{
+    padding-top: 80px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-image: url('https://image.freepik.com/free-photo/table-with-fuzzy-background_1253-28.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+
+} */

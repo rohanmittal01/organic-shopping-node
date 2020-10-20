@@ -1,0 +1,18 @@
+.nav-container {
+  height: 58px;
+  width: 100%;
+  position: fixed;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  transition: background-color 0.2s linear;
+ } 
+.nav-container.nav-controls {
+      float: right;
+      
+    }
+
+.nav-container.nav-solid {
+    background-color: #aaa;
+    transition: background-color 0.2s linear;
+  }
