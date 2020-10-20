@@ -75,8 +75,8 @@ export class CheckOutComponent implements OnInit {
 
   randomString() {
     const chars =
-      '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz';
-    const stringLength = 10;
+      '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghiklmnopqrstuvwxyz';
+    const stringLength = 12;
     let randomstring = '';
     for (let i = 0; i < stringLength; i++) {
       const rnum = Math.floor(Math.random() * chars.length);
@@ -190,3 +190,4 @@ export class CheckOutComponent implements OnInit {
     });
   }
 }
+

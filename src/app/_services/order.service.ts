@@ -20,4 +20,16 @@ export class OrderService {
     return this.http.get(this.baseUrl + 'orders/' + this.authService.decodedToken._id);
   }
 
+  getOrderById(id){
+    return this.http.get(this.baseUrl + 'order/' + id);
+  }
+
+  getOrderDetails(orderId){
+    return this.http.get(this.baseUrl+'order/id/'+orderId);
+  }
+
+  updateOrder(params){
+    return this.http.patch(this.baseUrl + 'orders/' + params.id, params.body);
+  }
+
 }

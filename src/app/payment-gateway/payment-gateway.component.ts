@@ -63,18 +63,19 @@ export class PaymentGatewayComponent implements OnInit {
   save() {
     this.cardError = false;
     this.dateError = false;
-    let c = String(this.card.number);
+    const c = String(this.card.number);
     this.checkDate();
 
   }
 
   checkDate(){
-    let date = new Date();
-    let month = date.getMonth() + 1;
-    let year = date.getFullYear();
+    const date = new Date();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
     if (year > this.card.year){
       this.dateError = true;
       console.log('here');
+      // tslint:disable-next-line: triple-equals
     }else if (year == Number(this.card.year)){
       if (month >= Number(this.card.month)){
         this.dateError = true;
@@ -90,29 +91,37 @@ export class PaymentGatewayComponent implements OnInit {
   }
 
   checkCard(){
-    let c = String(this.card.number);
+    const c = String(this.card.number);
+    // tslint:disable-next-line: triple-equals
     if (this.cardDigit == 3) {
+      // tslint:disable-next-line: triple-equals
       if (c.length == 15) {
         this.cardError = false;
-        this.proceed();
+        this.secondCheck();
       } else {
         this.cardError = true;
       }
+      // tslint:disable-next-line: triple-equals
     } else if (this.cardDigit == 4) {
+      // tslint:disable-next-line: triple-equals
       if (c.length == 13 || c.length == 16 || c.length == 19) {
         this.cardError = false;
         this.secondCheck();
       } else {
         this.cardError = true;
       }
+    // tslint:disable-next-line: triple-equals
     } else if (this.cardDigit == 5) {
+      // tslint:disable-next-line: triple-equals
       if (c.length == 16) {
         this.cardError = false;
         this.secondCheck();
       } else {
         this.cardError = true;
       }
+    // tslint:disable-next-line: triple-equals
     } else if (this.cardDigit == 6) {
+      // tslint:disable-next-line: triple-equals
       if (c.length == 16 || c.length == 19) {
         this.cardError = false;
         this.secondCheck();
@@ -131,8 +140,9 @@ export class PaymentGatewayComponent implements OnInit {
     const reversedNum = c.toString().split('').reverse().map(Number);
 
     // tslint:disable-next-line: forin
-    for (let num in reversedNum) {
+    for (const num in reversedNum) {
       // tslint:disable-next-line: radix
+      // tslint:disable-next-line: triple-equals
       if (parseInt(num) % 2 == 0){
         // console.log(reversedNum[num]);
         reversedNum[num] = reversedNum[num] * 2;
@@ -144,9 +154,11 @@ export class PaymentGatewayComponent implements OnInit {
       // console.log(num);
     }
     console.log(cardSum);
+    // tslint:disable-next-line: triple-equals
     if (cardSum % 10 == lastDigit){
       this.cardError = false;
       this.proceed();
+      // alert("Great");
     }else{
       this.cardError = true;
     }
@@ -154,13 +166,14 @@ export class PaymentGatewayComponent implements OnInit {
   }
 
   proceed() {
-    let cardNumString: String = this.card.number.toString();
-    let len = cardNumString.length;
-    let splitNum = cardNumString.split('');
-    for(const i in splitNum){
+    // tslint:disable-next-line: ban-types
+    const cardNumString: String = this.card.number.toString();
+    const len = cardNumString.length;
+    const splitNum = cardNumString.split('');
+    for (const i in splitNum){
       // console.log(i);
-      if(Number(i) > 1 && Number(i) < (len - 2)){
-        splitNum[i] = "*";
+      if (Number(i) > 1 && Number(i) < (len - 2)){
+        splitNum[i] = '*';
       }
     }
     console.log(splitNum);
@@ -171,21 +184,17 @@ export class PaymentGatewayComponent implements OnInit {
     this.orderService.orderData = this.orderData;
     this.orderService.postOrder().subscribe(x => {
       this.alertify.success('Order placed successfully!');
-      this.cartService.clearCart().subscribe(x => {
+      this.cartService.clearCart().subscribe(() => {
         this.routeService.orderSuccessRoute = true;
         this.route.navigate(['/order-success']);
       }, error => {
         this.alertify.error('Cart could not be cleared');
       });
-      
-
     }, error => {
       console.log(error);
       this.alertify.error('Order could not be placed!');
-    })
-    
+    });
   }
-
 
   validate() {
     console.log(this.card.number);

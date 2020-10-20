@@ -1,125 +1,188 @@
 <div class="row">
-    <div class="col">
-        <button type="button"  class="btn btn-info" routerLink="/admin/delivery-person">    
-            <span class="material-icons">
-                arrow_back
-          </span>
-        </button>
-        <div class="card card-1 mt-2">
-            <div class="card-body">
-                <form #f="ngForm" (submit)="save()">
-                    <div class="form-group">
-                        <!-- <label for="name">Name</label> -->
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Name *</span>
-                              </div>
-                            <input autofocus required [(ngModel)]="deliveryperson.name" #name="ngModel" name="name" id="name" type="text" class="form-control">
-                        </div>
-                            <div class="alert alert-danger" *ngIf="name.touched && name.invalid">
-                                <div *ngIf="name.errors.required">Name is required.</div>
-                            </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="gender">Gender</label>
-                        <select required [(ngModel)]="deliveryperson.gender" #gender="ngModel" name="gender" id="gender" type="text" class="form-control">
-                            <option value=""></option>
-                            <option>Male</option>
-                            <option>Female</option>
-                            <option>Others</option>
-                        </select>
-                        <div class="alert alert-danger" *ngIf="gender.touched && gender.invalid">Gender is required.</div>
-                    </div>
-                    <div class="form-group">
-                        <!-- <label for="name">Name</label> -->
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Phone Number *</span>
-                              </div>
-                            <input required [(ngModel)]="deliveryperson.phoneNumber" #phoneNumber="ngModel" name="phoneNumber" id="phoneNumber" type="number" class="form-control">
-                        </div>
-                            <div class="alert" *ngIf="phoneNumber.touched && phoneNumber.invalid">
-                                <div *ngIf="phoneNumber.errors.required">Phone Number is required.</div>
-                            </div>
-                    </div>
-                    <div class="form-group">
-                        <!-- <label for="name">Name</label> -->
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Address Line 1 *</span>
-                              </div>
-                            <input required [(ngModel)]="address.addressLine1" #addressLine1="ngModel" name="addressLine1" id="addressLine1" type="text" class="form-control">
-                        </div>
-                            <div class="alert alert-danger" *ngIf="addressLine1.touched && addressLine1.invalid">
-                                <div *ngIf="addressLine1.errors.required">Address is required.</div>
-                            </div>
-                    </div>
-                    <div class="form-group">
-                        <!-- <label for="name">Name</label> -->
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Address Line 2</span>
-                              </div>
-                            <input [(ngModel)]="address.addressLine2" #addressLine2="ngModel" name="addressLine2" id="addressLine2" type="text" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <!-- <label for="name">Name</label> -->
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">City *</span>
-                              </div>
-                            <input [(ngModel)]="address.city" #city="ngModel" name="city" id="city" type="text" class="form-control">
-                        </div>
-                        <div class="alert alert-danger" *ngIf="city.touched && city.invalid">
-                            <div *ngIf="city.errors.required">City is required.</div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <!-- <label for="name">Name</label> -->
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">State *</span>
-                              </div>
-                            <input [(ngModel)]="address.state" #state="ngModel" name="state" id="state" type="text" class="form-control">
-                        </div>
-                        <div class="alert alert-danger" *ngIf="state.touched && state.invalid">
-                            <div *ngIf="state.errors.required">State is required.</div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <!-- <label for="name">Name</label> -->
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Country *</span>
-                              </div>
-                            <input [(ngModel)]="address.country" #country="ngModel" name="country" id="country" type="text" class="form-control">
-                        </div>
-                        <div class="alert alert-danger" *ngIf="country.touched && country.invalid">
-                            <div *ngIf="country.errors.required">Country is required.</div>
-                        </div>
-                    </div>
-                    <div class="mt-2 mb-2">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                              <mat-checkbox
-                              class="example-margin"
-                              name="isActive"
-                              class="input-group-text"
-                              [(ngModel)]="deliveryperson.isActive"
-                              #isActive="ngModel"
-                              (ngModelChange)="openDialog()"
-                              
-                              ><span>Is Active</span></mat-checkbox>
-                              </div>
-                        </div>
-                    </div>
-                    <button class="btn btn-primary" [disabled]="!f.valid">Save</button>
-                    <button class="btn btn-danger ml-2" type="button" (click)="delete()">Delete</button>
-                </form>
+  <div class="col">
+    <button
+      type="button"
+      class="btn btn-info"
+      routerLink="/admin/delivery-person"
+    >
+      <span class="material-icons"> arrow_back </span>
+    </button>
+    <div class="card card-1 mt-2">
+      <div class="card-body">
+        <form #f="ngForm" (submit)="save()">
+          <div class="form-group">
+            <!-- <label for="name">Name</label> -->
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Name *</span>
+              </div>
+              <input
+                autofocus
+                required
+                [(ngModel)]="deliveryperson.name"
+                #name="ngModel"
+                name="name"
+                id="name"
+                type="text"
+                class="form-control"
+              />
             </div>
-        </div>
+            <!-- <div class="alert alert-danger" *ngIf="name.touched && name.invalid">
+                                <div *ngIf="name.errors.required">Name is required.</div>
+                            </div> -->
+          </div>
+          <div class="form-group">
+            <label for="gender">Gender</label>
+            <select
+              required
+              [(ngModel)]="deliveryperson.gender"
+              #gender="ngModel"
+              name="gender"
+              id="gender"
+              type="text"
+              class="form-control"
+            >
+              <option value=""></option>
+              <option>Male</option>
+              <option>Female</option>
+              <option>Others</option>
+            </select>
+            <!-- <div class="alert alert-danger" *ngIf="gender.touched && gender.invalid">Gender is required.</div> -->
+          </div>
+          <div class="form-group">
+            <!-- <label for="name">Name</label> -->
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Phone Number *</span>
+              </div>
+              <input
+                required
+                [(ngModel)]="deliveryperson.phoneNumber"
+                #phoneNumber="ngModel"
+                name="phoneNumber"
+                id="phoneNumber"
+                type="number"
+                class="form-control"
+              />
+            </div>
+            <!-- <div class="alert" *ngIf="phoneNumber.touched && phoneNumber.invalid">
+                                <div *ngIf="phoneNumber.errors.required">Phone Number is required.</div>
+                            </div> -->
+          </div>
+          <div class="form-group">
+            <!-- <label for="name">Name</label> -->
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Address Line 1 *</span>
+              </div>
+              <input
+                required
+                [(ngModel)]="address.addressLine1"
+                #addressLine1="ngModel"
+                name="addressLine1"
+                id="addressLine1"
+                type="text"
+                class="form-control"
+              />
+            </div>
+            <!-- <div class="alert alert-danger" *ngIf="addressLine1.touched && addressLine1.invalid">
+                                <div *ngIf="addressLine1.errors.required">Address is required.</div>
+                            </div> -->
+          </div>
+          <div class="form-group">
+            <!-- <label for="name">Name</label> -->
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Address Line 2</span>
+              </div>
+              <input
+                [(ngModel)]="address.addressLine2"
+                #addressLine2="ngModel"
+                name="addressLine2"
+                id="addressLine2"
+                type="text"
+                class="form-control"
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <!-- <label for="name">Name</label> -->
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">City *</span>
+              </div>
+              <input
+                [(ngModel)]="address.city"
+                #city="ngModel"
+                name="city"
+                id="city"
+                type="text"
+                class="form-control"
+              />
+            </div>
+            <!-- <div class="alert alert-danger" *ngIf="city.touched && city.invalid">
+                            <div *ngIf="city.errors.required">City is required.</div>
+                        </div> -->
+          </div>
+          <div class="form-group">
+            <!-- <label for="name">Name</label> -->
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">State *</span>
+              </div>
+              <input
+                [(ngModel)]="address.state"
+                #state="ngModel"
+                name="state"
+                id="state"
+                type="text"
+                class="form-control"
+              />
+            </div>
+            <!-- <div class="alert alert-danger" *ngIf="state.touched && state.invalid">
+                            <div *ngIf="state.errors.required">State is required.</div>
+                        </div> -->
+          </div>
+          <div class="form-group">
+            <!-- <label for="name">Name</label> -->
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Country *</span>
+              </div>
+              <input
+                [(ngModel)]="address.country"
+                #country="ngModel"
+                name="country"
+                id="country"
+                type="text"
+                class="form-control"
+              />
+            </div>
+            <!-- <div class="alert alert-danger" *ngIf="country.touched && country.invalid">
+                            <div *ngIf="country.errors.required">Country is required.</div>
+                        </div> -->
+          </div>
+          <div class="mt-2 mb-2">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <mat-checkbox
+                  class="example-margin"
+                  name="isActive"
+                  class="input-group-text"
+                  [(ngModel)]="deliveryperson.isActive"
+                  #isActive="ngModel"
+                  (ngModelChange)="openDialog()"
+                  ><span>Is Active</span></mat-checkbox
+                >
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-primary" [disabled]="!f.valid">Save</button>
+          <button class="btn btn-danger ml-2" type="button" (click)="delete()">
+            Delete
+          </button>
+        </form>
+      </div>
     </div>
-   
-   
+  </div>
 </div>

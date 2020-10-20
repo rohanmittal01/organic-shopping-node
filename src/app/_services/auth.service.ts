@@ -16,27 +16,13 @@ export class AuthService {
   decodedToken: any;
   // logged = false;
   constructor(private http: HttpClient, private route: Router, private alertify: AlertifyService) { }
-
   login(model: any) {
     return this.http.post(this.baseUrl + 'login', model);
-    // .pipe(
-    //   map((response: any) => {
-    //     const user = response;
-    //     // console.log(user);
-    //     if (user) {
-    //       localStorage.setItem('token', user.token);
-    //       this.route.navigate(['/']);
-    //     }
-    //   })
-    // );
   }
-
   loggedIn(){
     let token = localStorage.getItem('token');
     return !this.jwtHelper.isTokenExpired(token);
   }
-
-
   logout(){
     if(this.loggedIn()){
       localStorage.removeItem('token');
@@ -44,24 +30,13 @@ export class AuthService {
       this.alertify.warning('Logged Out!');
       window.location.reload();
       this.route.navigate(['/login']);
-
-      // this.logged = false
-
     }
   }
   register(model: any){
     // console.log(model);
     return this.http.post(this.baseUrl + 'register', model);
   }
-
-  // modify(model: any){
-  //   return this.http.post(this.dataUrl + 'modify', model);
-  // }
-
   changePassword(model: any){
     return this.http.post(this.baseUrl + 'newPassword', model);
   }
-
-
-
 }

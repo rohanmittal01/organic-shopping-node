@@ -3,6 +3,11 @@
     <div class="card-body">
       <h6 class="card-title">{{ product.title }}</h6>
       <p class="card-text">{{ product.price | currency: "INR" }}</p>
+      <div *ngIf="showActions">
+        <button class="btn btn-warning w-100" (click)="details()">
+          <b>Get Info <img src="https://cdn4.iconfinder.com/data/icons/linecon/512/info-256.png" style="height:20px;width: 20px;"></b>
+        </button>
+      </div><br>
       <p *ngIf="!product.isAvailable" class="card-text" style="color: red">Currently Unavailable</p>
     </div>
 
@@ -21,6 +26,5 @@
             </div>
           </div>
         </ng-template>
-
       </div>
   </div>

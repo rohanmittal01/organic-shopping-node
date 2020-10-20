@@ -8,6 +8,7 @@ import { AlertifyService } from '../_services/alertify.service';
 import { OrderService } from '../_services/order.service';
 
 @Component({
+  // tslint:disable-next-line: component-selector
   selector: 'my-orders',
   templateUrl: './my-orders.component.html',
   styleUrls: ['./my-orders.component.css']
@@ -29,12 +30,10 @@ export class MyOrdersComponent{
     this.orderService.getOrders().subscribe(orders => {
       console.log(orders);
       this.convertDate(orders);
-      
     });
 
     this.categoryService.getAll().subscribe(products => {
       // console.log(products);
-      
     });
    }
    convertDate(orders){
@@ -44,9 +43,9 @@ export class MyOrdersComponent{
       orders[id].datePlaced = new Date(orders[id].datePlaced).toLocaleString();
     }
     this.array = orders;
-      this.listData = new MatTableDataSource(this.array);
-      this.listData.sort = this.sort;
-      this.listData.paginator = this.paginator;
+    this.listData = new MatTableDataSource(this.array);
+    this.listData.sort = this.sort;
+    this.listData.paginator = this.paginator;
    }
    applyFilter(){
     this.listData.filter = this.searchKey.toLowerCase();
@@ -56,5 +55,4 @@ export class MyOrdersComponent{
     this.applyFilter();
   }
 
- 
 }

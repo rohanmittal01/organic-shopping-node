@@ -21,7 +21,7 @@ export class OrderSuccessService {
     if (this.id == this.authService.decodedToken._id){
       return true;
     }
-    return true;
+    // return true;
     this.alertify.error("You shall not pass!");
     //this.router.navigate(['/login'], {queryParams: {returnUrl: state.url}});
     this.router.navigate(['/']);

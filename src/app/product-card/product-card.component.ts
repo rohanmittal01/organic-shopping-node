@@ -3,6 +3,7 @@ import { ProductService } from '../_services/product.service';
 import { ShoppingCartService } from '../_services/shopping-cart.service';
 import { AlertifyService } from '../_services/alertify.service';
 import { AuthService } from '../_services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -26,12 +27,18 @@ export class ProductCardComponent implements OnInit {
     private productService: ProductService,
     private cartService: ShoppingCartService,
     private alertify: AlertifyService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {
     this.shoppingCart = cartService.cart;
   }
 
   ngOnInit(): void {}
+
+  details(){
+    console.log('detials');
+    this.router.navigate(['products/' + this.product._id]);
+  }
 
   getQuantity() {
     this.shoppingCart = this.cartService.cart;
@@ -93,7 +100,6 @@ export class ProductCardComponent implements OnInit {
         this.cartService.createShoppingCart(data).subscribe(
           () => {
             this.getQuantity();
-            
             this.alertify.success('Shopping Cart created');
             window.location.reload();
           },

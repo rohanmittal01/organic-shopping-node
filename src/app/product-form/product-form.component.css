@@ -1,0 +1,14 @@
+input:invalid{
+    border: 2px solid red;
+    border-radius: 5px;
+    background-image: url(../icons/invalid.png);
+    background-position: right;
+    background-repeat: no-repeat;
+}
+input:valid{
+    border: 2px solid green;
+    border-radius: 5px;
+    background-image: url(../icons/valid.png);
+    background-position: right;
+    background-repeat: no-repeat;
+}

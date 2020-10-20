@@ -52,6 +52,8 @@ import { ShoppingCartService } from './_services/shopping-cart.service';
 import { OrderSuccessService } from './_guards/order-success.service';
 import { NoRouteComponent } from './no-route/no-route.component';
 import { RouteService } from './_guards/route.service';
+import { MoreOrderDetailsComponent } from './my-orders/more-order-details/more-order-details.component';
+import { ProductDetailsComponent } from './products/product-details/product-details.component';
 
 
 @NgModule({
@@ -79,7 +81,9 @@ import { RouteService } from './_guards/route.service';
     BannerComponent,
     ShoppingCartSummaryComponent,
     PaymentGatewayComponent,
-    NoRouteComponent
+    NoRouteComponent,
+    MoreOrderDetailsComponent,
+    ProductDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -102,6 +106,7 @@ import { RouteService } from './_guards/route.service';
     RouterModule.forRoot([
       {path: '', component: ProductsComponent, canActivate: [AuthGuardService]},
       {path: 'products', component: ProductsComponent, canActivate: [AuthGuardService]},
+      {path: 'products/:id', component: ProductDetailsComponent, canActivate: [AuthGuardService]},
       {path: 'shopping-cart', component: ShoppingCartComponent, canActivate: [AuthGuardService]},
       {path: 'login', component: LoginComponent},
       {path: 'register', component: RegisterComponent},
@@ -110,7 +115,7 @@ import { RouteService } from './_guards/route.service';
       {path: 'payment-gateway', component: PaymentGatewayComponent, canActivate: [AuthGuardService, RouteService]},
       {path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuardService, RouteService]},
       {path: 'my/orders', component: MyOrdersComponent, canActivate: [AuthGuardService]},
-
+      {path: 'my/orders/:id', component: MoreOrderDetailsComponent, canActivate: [AuthGuardService]},
      {path: 'admin/products/new', component: ProductFormComponent},
       {path: 'admin/products/:id', component: ProductFormComponent},
       {path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuardService]},

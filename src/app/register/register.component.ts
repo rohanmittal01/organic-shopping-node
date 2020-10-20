@@ -75,6 +75,7 @@ sendOtp(model){
     this.alertify.error('Password not confirmed');
   }
 
+
 }
 
 otpSubmitPressed(){
@@ -100,7 +101,6 @@ otpSubmitPressed(){
       // const token = localStorage.getItem('token');
       // console.log(token)
       this.route.navigate(['/login']);
-
     }, error => {
       console.log(error);
       // tslint:disable-next-line: triple-equals

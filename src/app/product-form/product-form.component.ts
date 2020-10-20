@@ -18,23 +18,17 @@ export class ProductFormComponent implements OnInit {
   product: any = {};
   id;
   constructor(private route: ActivatedRoute, private router: Router, private dialog: MatDialog,
+              // tslint:disable-next-line: max-line-length
               private categoryService: CategoryService, private productService: ProductService, private alertify: AlertifyService, private authService: AuthService) {
-      
       categoryService.getAll().subscribe(categories => {
         this.categories$ = categories;
         console.log(categories);
         this.getProductInfo();
       })
       this.id = this.route.snapshot.paramMap.get('id');
-
-      
-
-     }
-
+    }
   ngOnInit(): void {
-
   }
-
   getProductInfo(){
     if (this.id){
       this.productService.get(this.id).subscribe(p => {
@@ -68,7 +62,6 @@ export class ProductFormComponent implements OnInit {
     });
   }
   }
-
   delete(){
     console.log(this.product);
     this.productService.delete(this.id).subscribe(x => {
@@ -78,7 +71,6 @@ export class ProductFormComponent implements OnInit {
       this.alertify.error('Product could not be deleted!')
     });
   }
-
   openDialog(): void {
     if (this.id) {
       let dialogRef = this.dialog.open(ActiveDialogComponent);
@@ -96,5 +88,4 @@ export class ProductFormComponent implements OnInit {
       });
     }
   }
-  
 }

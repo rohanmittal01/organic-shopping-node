@@ -48,12 +48,13 @@
         <mat-cell *matCellDef="let element">
             <p *ngIf="element.status == 'Order Placed'" style="color: orange">{{ element.status }}</p>
             <p *ngIf="element.status == 'Delivered'" style="color: green">{{ element.status }}</p>
+            <p *ngIf="element.status == 'Returned'" style="color: red">{{ element.status }}</p>
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="$key">
         <mat-header-cell *matHeaderCellDef>Edit</mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <button type="button" class="btn btn-primary" style="color: white; background-color: teal;" [routerLink]="['/admin/categories/', element._id]" >
+          <button type="button" class="btn btn-primary" style="color: white; background-color: teal;" [routerLink]="['/my/orders/', element._id]" >
             View more
           </button>
         </mat-cell>

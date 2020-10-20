@@ -57,25 +57,25 @@ export class DeliveryPersonFormComponent implements OnInit {
       this.deliveryperson.modifiedBy = this.authService.decodedToken.email;
       this.deliverypersonService.update(this.id, this.deliveryperson).subscribe(
         (x) => {
-          this.alertify.success('Category updated successfully!');
+          this.alertify.success('Delivery Person updated successfully!');
           this.router.navigate(['/admin/delivery-person']);
         },
         (error) => {
-          this.alertify.error('Category could not be updated!');
+          this.alertify.error('Delivery Person could not be updated!');
         }
       );
     } else {
-      this.deliveryperson.dateAdded = new Date(Date())
+      this.deliveryperson.dateAdded = new Date(Date());
       this.deliveryperson.addedBy = this.authService.decodedToken.email;
-      this.deliveryperson.modifiedDate = new Date(Date())
+      this.deliveryperson.modifiedDate = new Date(Date());
       this.deliveryperson.modifiedBy = this.authService.decodedToken.email;
       this.deliverypersonService.create(this.deliveryperson).subscribe(
         (x) => {
-          this.alertify.success('Category Added Successfully!');
+          this.alertify.success('Delivery Person Added Successfully!');
           this.router.navigate(['/admin/delivery-person']);
         },
         (error) => {
-          this.alertify.error('Category could not be added!');
+          this.alertify.error('Delivery Person could not be added!');
         }
       );
     }
@@ -84,22 +84,24 @@ export class DeliveryPersonFormComponent implements OnInit {
   delete() {
     this.deliverypersonService.delete(this.id).subscribe(
       (x) => {
-        this.alertify.success('Category deleted successfully!');
+        this.alertify.success('Delivery Person deleted successfully!');
         this.router.navigate(['/admin/delivery-person']);
       },
       (error) => {
-        this.alertify.error('Category could not be deleted!');
+        this.alertify.error('Delivery Person could not be deleted!');
       }
     );
   }
 
   openDialog(): void {
     if (this.id) {
-      let dialogRef = this.dialog.open(ActiveDialogComponent);
+      const dialogRef = this.dialog.open(ActiveDialogComponent);
       dialogRef.afterClosed().subscribe((result) => {
         console.log('Dialog Result: ' + result);
+        // tslint:disable-next-line: triple-equals
         if (result == 'Yes') {
           this.alertify.success('Deliveryman activation status Confirmed.');
+        // tslint:disable-next-line: triple-equals
         } else if (result == 'No') {
           // this.search();
           this.deliveryperson.isActive = !this.deliveryperson.isActive;

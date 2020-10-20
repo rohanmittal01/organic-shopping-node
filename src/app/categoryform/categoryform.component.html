@@ -16,7 +16,7 @@
                           </div>
                         <input autofocus required [(ngModel)]="product.key" #key="ngModel"  name="key" id="key" type="text" class="form-control">
                         </div>
-                        <div class="alert alert-danger" *ngIf="key.touched && key.invalid">Key is required.</div>
+                        <!-- <div class="alert alert-danger" *ngIf="key.touched && key.invalid">Key is required.</div> -->
                     </div>
                     <div class="form-group">
                         <!-- <label for="name">Name</label> -->
@@ -26,9 +26,9 @@
                               </div>
                             <input required [(ngModel)]="product.name" #name="ngModel" name="name" id="name" type="text" class="form-control">
                         </div>
-                            <div class="alert alert-danger" *ngIf="name.touched && name.invalid">
+                            <!-- <div class="alert alert-danger" *ngIf="name.touched && name.invalid">
                                 <div *ngIf="name.errors.required">Name is required.</div>
-                            </div>
+                            </div> -->
                     </div>
                     <button class="btn btn-primary" [disabled]="!f.valid">Save</button>
                     <button class="btn btn-danger ml-2" type="button" (click)="delete()">Delete</button>

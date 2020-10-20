@@ -59,7 +59,7 @@ export class ProductsComponent implements OnInit {
         this.productService.getAll().subscribe((x) => {
           this.filteredProducts = x;
         }, error => {
-
+          
         });
       } else if (this.category) {
         this.filteredProducts = this.productListCollection.filter(
